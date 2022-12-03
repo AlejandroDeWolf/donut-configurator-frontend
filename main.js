@@ -43,3 +43,11 @@ console.log(Mesh);
 
 
 
+
+const pointLight = new THREE.PointLight(0xFFFFFF, 0.5);
+pointLight.position.set(10, 10, 10);
+scene.add(pointLight);
+
+const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.6);
+scene.add(ambientLight);
+
