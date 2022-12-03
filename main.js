@@ -59,3 +59,15 @@ function update() {
     Mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
+
+const doughs = document.querySelectorAll('.dough');
+doughs.forEach(button => {
+    button.addEventListener('click', () => {
+        var dough = button.id;
+        for (var i = 0; i < Mesh.children.length; i++) {
+            if (Mesh.children[i].name.startsWith("Glaze")) {
+                Mesh.children[i].material.color.setHex(dough);
+            }
+        }
+    });
+});
