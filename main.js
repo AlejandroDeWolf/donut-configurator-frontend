@@ -51,3 +51,11 @@ scene.add(pointLight);
 const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.6);
 scene.add(ambientLight);
 
+
+requestAnimationFrame(update);
+
+function update() {
+    requestAnimationFrame(update);
+    Mesh.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
