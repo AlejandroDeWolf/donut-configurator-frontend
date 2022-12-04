@@ -77,20 +77,22 @@ function update() {
     renderer.render(scene, camera);
 }
 
-const doughs = document.querySelectorAll('.glaze');
-doughs.forEach(button => {
+// Set glaze color
+const glazes = document.querySelectorAll('.glaze');
+glazes.forEach(button => {
     button.addEventListener('click', () => {
-        var dough = button.dataset.dough;
+        var glaze = button.dataset.glaze;
         for (var i = 0; i < Mesh.children.length; i++) {
             if (Mesh.children[i].name.startsWith("Glaze")) {
-                Mesh.children[i].material.color.setHex(dough);
+                Mesh.children[i].material.color.setHex(glaze);
             }
         }
     });
 });
 
-const glazes = document.querySelectorAll('.topping');
-glazes.forEach(button => {
+// Set topping color
+const toppings = document.querySelectorAll('.topping');
+toppings.forEach(button => {
     button.addEventListener('click', () => {
         hideToppings();
         for (var i = 0; i < Mesh.children.length; i++) {
@@ -115,3 +117,7 @@ function hideToppings() {
         }
     }
 }
+
+document.querySelector('.topping__clear').addEventListener('click', () => {
+    hideToppings();
+});
