@@ -78,13 +78,9 @@ function update() {
     console.log(DonutDough+" "+DonutGlaze+" "+DonutTopping);
 }
 
-
-var DonutDough;
-var DonutGlaze;
-var DonutTopping;
-
-const doughs = document.querySelectorAll('.glaze');
-doughs.forEach(button => {
+// Set glaze color
+const glazes = document.querySelectorAll('.glaze');
+glazes.forEach(button => {
     button.addEventListener('click', () => {
         var glaze = button.dataset.glaze;
         for (var i = 0; i < Mesh.children.length; i++) {
@@ -96,8 +92,9 @@ doughs.forEach(button => {
     });
 });
 
-const glazes = document.querySelectorAll('.topping');
-glazes.forEach(button => {
+// Set topping color
+const toppings = document.querySelectorAll('.topping');
+toppings.forEach(button => {
     button.addEventListener('click', () => {
         hideToppings();
         for (var i = 0; i < Mesh.children.length; i++) {
@@ -124,7 +121,6 @@ function hideToppings() {
     }
 }
 
-
-
-
-
+document.querySelector('.topping__clear').addEventListener('click', () => {
+    hideToppings();
+});
