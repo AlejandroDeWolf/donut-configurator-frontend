@@ -78,6 +78,10 @@ function update() {
     console.log(DonutDough+" "+DonutGlaze+" "+DonutTopping);
 }
 
+var DonutDough;
+var DonutGlaze;
+var DonutTopping;
+
 // Set glaze color
 const glazes = document.querySelectorAll('.glaze');
 glazes.forEach(button => {
@@ -124,3 +128,4 @@ function hideToppings() {
 document.querySelector('.topping__clear').addEventListener('click', () => {
     hideToppings();
 });
+
