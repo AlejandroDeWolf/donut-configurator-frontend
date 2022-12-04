@@ -32,17 +32,22 @@ controls.maxDistance = 5;
 var Mesh = null;
 
 const loader = new GLTFLoader();
-loader.load('images/donut.glb', function (gltf) {
+loader.load('images/donut2.glb', function (gltf) {
     Mesh = gltf.scene;
     Mesh.rotation.x = Math.PI / 4;
     scene.add(Mesh);
     for (var i = 0; i < Mesh.children.length; i++) {
-        if (Mesh.children[i].name.startsWith("Doughnut")) {
-            Mesh.children[i].material.color.setHex(0xf7e4c4);
-        } else if (Mesh.children[i].name.startsWith("Sprinkle")) {
+        if (Mesh.children[i].name.startsWith("Doughnut") || Mesh.children[i].name.startsWith("Glaze")) {
+            if (Mesh.children[i].name.startsWith("Doughnut")) {
+                Mesh.children[i].material.color.setHex(0xf7e4c4);
+            } 
+            Mesh.children[i].visible = true;
+        }
+        else {
             Mesh.children[i].visible = false;
         }
     }
+    console.log(Mesh);
 });
 
 
@@ -71,7 +76,7 @@ function update() {
     renderer.render(scene, camera);
 }
 
-const doughs = document.querySelectorAll('.dough');
+const doughs = document.querySelectorAll('.glaze');
 doughs.forEach(button => {
     button.addEventListener('click', () => {
         var dough = button.dataset.dough;
@@ -86,6 +91,7 @@ doughs.forEach(button => {
 const glazes = document.querySelectorAll('.topping');
 glazes.forEach(button => {
     button.addEventListener('click', () => {
+        hideToppings();
         for (var i = 0; i < Mesh.children.length; i++) {
             var fullTopping = button.dataset.topping;
             var topping = fullTopping.substring(0, fullTopping.indexOf("_"));
@@ -101,6 +107,13 @@ glazes.forEach(button => {
     });
 });
 
+function hideToppings() {
+    for (var i = 0; i < Mesh.children.length; i++) {
+        if (!Mesh.children[i].name.startsWith("Doughnut") && !Mesh.children[i].name.startsWith("Glaze")) {
+            Mesh.children[i].visible = false;
+        }
+    }
+}
 
 
 
