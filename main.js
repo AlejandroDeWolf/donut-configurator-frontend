@@ -43,8 +43,7 @@ loader.load('images/donut2.glb', function (gltf) {
                 Mesh.children[i].material.color.setHex(0xf7e4c4);
             }
             Mesh.children[i].visible = true;
-        }
-        else {
+        } else {
             Mesh.children[i].visible = false;
         }
     }
@@ -75,12 +74,13 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    console.log(DonutDough+" "+DonutGlaze+" "+DonutTopping);
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping+ " " + DonutBrandTag);
 }
 
 var DonutDough;
 var DonutGlaze;
 var DonutTopping;
+var DonutBrandTag;
 
 // Set glaze color
 const glazes = document.querySelectorAll('.glaze');
@@ -129,3 +129,26 @@ document.querySelector('.topping__clear').addEventListener('click', () => {
     hideToppings();
 });
 
+
+window.ajaxSuccess = function () {
+    let response = JSON.parse(this.responseText);
+    console.log("ajaxSuccess", typeof this.responseText);
+    console.log(response.secure_url);
+    DonutBrandTag = response.secure_url;
+};
+window.AJAXSubmit = function (formElement) {
+    if (!formElement.action) {
+        console.log("fail");
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onload = ajaxSuccess;
+    xhr.open("post", "https://api.cloudinary.com/v1_1/dck3erw0v/image/upload");
+    var dataPreset = new FormData(formElement);
+    dataPreset.append("upload_preset", "donuts");
+    if (dataPreset.get("file").type == "image/jpeg" || dataPreset.get("file").type == "image/png") {
+        xhr.send(dataPreset);
+    } else {
+        alert("Please upload a jpg or png file");
+    }
+};
