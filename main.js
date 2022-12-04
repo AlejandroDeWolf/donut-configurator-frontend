@@ -37,7 +37,6 @@ loader.load('images/donut.glb', function (gltf) {
     Mesh.rotation.x = Math.PI / 4;
     scene.add(Mesh);
     for (var i = 0; i < Mesh.children.length; i++) {
-        //if name starts with Sprinkle then change color
         if (Mesh.children[i].name.startsWith("Doughnut")) {
             Mesh.children[i].material.color.setHex(0xf7e4c4);
         } else if (Mesh.children[i].name.startsWith("Sprinkle")) {
