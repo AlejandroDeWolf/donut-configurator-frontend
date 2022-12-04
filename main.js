@@ -31,6 +31,7 @@ controls.maxDistance = 5;
 
 var Mesh = null;
 
+// Load the model
 const loader = new GLTFLoader();
 loader.load('images/donut2.glb', function (gltf) {
     Mesh = gltf.scene;
@@ -40,7 +41,7 @@ loader.load('images/donut2.glb', function (gltf) {
         if (Mesh.children[i].name.startsWith("Doughnut") || Mesh.children[i].name.startsWith("Glaze")) {
             if (Mesh.children[i].name.startsWith("Doughnut")) {
                 Mesh.children[i].material.color.setHex(0xf7e4c4);
-            } 
+            }
             Mesh.children[i].visible = true;
         }
         else {
@@ -72,7 +73,7 @@ requestAnimationFrame(update);
 
 function update() {
     requestAnimationFrame(update);
-    Mesh.rotation.y += 0.01;
+    Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
 }
 
@@ -114,8 +115,3 @@ function hideToppings() {
         }
     }
 }
-
-
-
-
-
