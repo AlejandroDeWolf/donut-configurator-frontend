@@ -36,6 +36,14 @@ loader.load('images/donut.glb', function (gltf) {
     Mesh = gltf.scene;
     Mesh.rotation.x = Math.PI / 4;
     scene.add(Mesh);
+    for (var i = 0; i < Mesh.children.length; i++) {
+        //if name starts with Sprinkle then change color
+        if (Mesh.children[i].name.startsWith("Doughnut")) {
+            Mesh.children[i].material.color.setHex(0xf7e4c4);
+        } else if (Mesh.children[i].name.startsWith("Sprinkle")) {
+            Mesh.children[i].visible = false;
+        }
+    }
 });
 
 
@@ -47,7 +55,6 @@ window.addEventListener('resize', function () {
     camera.aspect = configurator.clientWidth / configurator.clientHeight;
     camera.updateProjectionMatrix();
 });
-
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 0.5);
 pointLight.position.set(10, 10, 10);
@@ -84,24 +91,19 @@ glazes.forEach(button => {
             var fullTopping = button.dataset.topping;
             var topping = fullTopping.substring(0, fullTopping.indexOf("_"));
             var toppingName = fullTopping.substring(fullTopping.indexOf("_") + 1);
-            console.log(topping+" "+toppingName);
+            console.log(topping + " " + toppingName);
             if (Mesh.children[i].name.startsWith(topping)) {
                 Mesh.children[i].visible = true;
                 if (toppingName) {
                     Mesh.children[i].material.color.setHex(toppingName);
                 }
-            } 
+            }
         }
     });
 });
 
-window.addEventListener('load', function () {
-    for (var i = 0; i < Mesh.children.length; i++) {
-        //if name starts with Sprinkle then change color
-        if (Mesh.children[i].name.startsWith("Doughnut")) {
-            Mesh.children[i].material.color.setHex(0xf7e4c4);
-        } else if (Mesh.children[i].name.startsWith("Sprinkle")) {
-            Mesh.children[i].visible = false;
-        }
-    }
-});
+
+
+
+
+
