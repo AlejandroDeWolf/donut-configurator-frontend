@@ -25,8 +25,6 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: $color-black;
-  max-width: 1600px;
-  margin: 0 auto;
 }
 
 // ------ Typo -------
@@ -34,12 +32,14 @@ h1 {
   font-family: "Dosis", sans-serif;
   font-weight: Bold;
   font-size: 3.1rem;
+  margin-bottom: 2rem;
 }
 
 h2 {
   font-family: "Dosis", sans-serif;
   font-weight: Bold;
   font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 h3 {
@@ -59,4 +59,27 @@ p {
   font-weight: normal;
   font-size: 1rem;
   line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: $color-black;
+}
+
+// ------ Layout ------
+.section__margin {
+  margin: 2rem 4rem;
+
+  @media (min-width: 1400px) {
+    margin: 2rem 8rem;
+  }
+}
+
+.section__padding {
+  padding: 2rem 4rem;
+
+  @media (min-width: 1400px) {
+    margin: 2rem 8rem;
+  }
 }

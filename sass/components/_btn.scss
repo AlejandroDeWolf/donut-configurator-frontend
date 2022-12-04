@@ -1,9 +1,10 @@
 @use "../global";
 
 .btn {
-  padding: 40px 16px;
+  padding: 16px 40px;
   border-radius: 50px;
   background-color: global.$color-primary;
+  color: global.$color-white;
 }
 
 .btn--active {
