@@ -129,12 +129,31 @@ document.querySelector('.topping__clear').addEventListener('click', () => {
     hideToppings();
 });
 
+function uploadBrandTag(image){
+    for (var i = 0; i < Mesh.children.length; i++) {
+        if (Mesh.children[i].name.startsWith("Naam")) {
+            Mesh.children[i].visible = true;
+            var texture = new THREE.TextureLoader().load(image);
+            Mesh.children[i].material.map = texture; 
+            Mesh.children[i].material.map.wrapS = THREE.RepeatWrapping;
+            Mesh.children[i].material.map.wrapT = THREE.RepeatWrapping;
+            Mesh.children[i].material.map.offset.set( 0, 0 );
+            Mesh.children[i].material.map.center.set( 0, 0 );
+            Mesh.children[i].material.map.repeat.set( 1, 1 );
+            Mesh.children[i].material.map.rotation = 0;
+            Mesh.children[i].material.map.flipY = false;
+            Mesh.children[i].material.map.needsUpdate = true;  
+            Mesh.children[i].rotation.y = Math.PI / 1.2;
+        }
+    }
+}
 
 window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
     console.log("ajaxSuccess", typeof this.responseText);
     console.log(response.secure_url);
     DonutBrandTag = response.secure_url;
+    uploadBrandTag(response.secure_url);
 };
 window.AJAXSubmit = function (formElement) {
     if (!formElement.action) {
