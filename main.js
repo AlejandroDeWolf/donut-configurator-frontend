@@ -71,3 +71,21 @@ doughs.forEach(button => {
         }
     });
 });
+
+const glazes = document.querySelectorAll('.topping');
+glazes.forEach(button => {
+    button.addEventListener('click', () => {
+        for (var i = 0; i < Mesh.children.length; i++) {
+            var fullTopping = button.id;
+            var topping = fullTopping.substring(0, fullTopping.indexOf("_"));
+            var toppingName = fullTopping.substring(fullTopping.indexOf("_") + 1);
+            console.log(topping+" "+toppingName);
+            if (Mesh.children[i].name.startsWith(topping)) {
+                Mesh.children[i].visible = true;
+                if (toppingName) {
+                    Mesh.children[i].material.color.setHex(toppingName);
+                }
+            } 
+        }
+    });
+});
