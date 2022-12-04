@@ -74,17 +74,24 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
+    console.log(DonutDough+" "+DonutGlaze+" "+DonutTopping);
 }
+
+
+var DonutDough;
+var DonutGlaze;
+var DonutTopping;
 
 const doughs = document.querySelectorAll('.glaze');
 doughs.forEach(button => {
     button.addEventListener('click', () => {
-        var dough = button.dataset.dough;
+        var glaze = button.dataset.glaze;
         for (var i = 0; i < Mesh.children.length; i++) {
             if (Mesh.children[i].name.startsWith("Glaze")) {
-                Mesh.children[i].material.color.setHex(dough);
+                Mesh.children[i].material.color.setHex(glaze);
             }
         }
+        DonutGlaze = button.dataset.glaze;
     });
 });
 
@@ -104,6 +111,7 @@ glazes.forEach(button => {
                 }
             }
         }
+        DonutTopping = button.dataset.topping;
     });
 });
 
@@ -114,6 +122,9 @@ function hideToppings() {
         }
     }
 }
+
+
+
 
 
 
