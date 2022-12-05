@@ -77,7 +77,7 @@ function update() {
     console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping+ " " + DonutBrandTag);
 }
 
-var DonutDough;
+var DonutDough = "base";
 var DonutGlaze;
 var DonutTopping;
 var DonutBrandTag;
@@ -148,22 +148,15 @@ function uploadBrandTag(image){
     }
 }
 
-window.ajaxSuccess = function () {
-    let response = JSON.parse(this.responseText);
-    console.log("ajaxSuccess", typeof this.responseText);
-    console.log(response.secure_url);
-    DonutBrandTag = response.secure_url;
-    uploadBrandTag(response.secure_url);
-};
 window.AJAXSubmit = function (formElement) {
     if (!formElement.action) {
         console.log("fail");
         return;
     }
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.onload = ajaxSuccess;
     xhr.open("post", "https://api.cloudinary.com/v1_1/dck3erw0v/image/upload");
-    var dataPreset = new FormData(formElement);
+    let dataPreset = new FormData(formElement);
     dataPreset.append("upload_preset", "donuts");
     if (dataPreset.get("file").type == "image/jpeg" || dataPreset.get("file").type == "image/png") {
         xhr.send(dataPreset);
@@ -171,3 +164,34 @@ window.AJAXSubmit = function (formElement) {
         alert("Please upload a jpg or png file");
     }
 };
+window.ajaxSuccess = function () {
+    let response = JSON.parse(this.responseText);
+    DonutBrandTag = response.secure_url;
+    uploadBrandTag(DonutBrandTag);
+};
+
+
+
+const api_url = "https://adorable-red-sundress.cyclic.app/donuts";
+
+//eventlistener for id postDonut prevent default
+document.getElementById("postDonut").addEventListener("click", function (e) {
+    e.preventDefault();
+    fetch(api_url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            dough : "Aimane2",
+            glaze: "Aimane2",
+            topping: "Aimane2",
+            company: "Aimane2"
+        }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    });
+});
+       
