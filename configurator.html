@@ -13,40 +13,62 @@
 
     <div id="app">
         <h1>Donutello Donut Configurator</h1>
-        <div id="configurator" style="width: 100%; height: 60vh; background-color: aliceblue;"></div>
+        <div id="container">
+            <div id="configurator"></div>
+            <div id="configurator__options">
+                <div>
+                    <ul>
+                        <li>Glaze</li>
+                        <li>></li>
+                        <li>Topping</li>
+                        <li>></li>
+                        <li>BrandTag</li>
+                        <li>></li>
+                        <li>Bake</li>
+                    </ul>
+                </div>
+                <div class="donut__glaze">
+                    <a href="#" data-glaze="0x7B3F00" class="glaze" style="background-color: #7B3F00;">choco glaze</a>
+                    <a href="#" data-glaze="0xF3E5AB" class="glaze" style="background-color: #F3E5AB;">vanille glaze</a>
+                    <a href="#" data-glaze="0x3C1F76" class="glaze" style="background-color: #3C1F76">blueberry
+                        glaze</a>
+                    <a href="#" data-glaze="0x000000" class="glaze" style="background-color: #000000;">black glaze</a>
+                    <a href="#" data-glaze="0xFFFFFF" class="glaze" style="background-color: #FFFFFF;">white glaze</a>
+                    <a href="#" data-glaze="0x7B3F00" class="glaze" style="background-color: #7B3F00;">choco glaze</a>
+                    <a href="#" data-glaze="0xF3E5AB" class="glaze" style="background-color: #F3E5AB;">vanille glaze</a>
+                    <a href="#" data-glaze="0x3C1F76" class="glaze" style="background-color: #3C1F76">blueberry
+                        glaze</a>
+                    <a href="#" data-glaze="0x000000" class="glaze" style="background-color: #000000;">black glaze</a>
+                    <a href="#" data-glaze="0xFFFFFF" class="glaze" style="background-color: #FFFFFF;">white glaze</a>
+                </div>
+                <div class="donut__topping">
+                    <a href="#" data-topping="Sprinkle_0x7B3F00" class="topping">choco topping</a>
+                    <a href="#" data-topping="Sprinkle_0xF3E5AB" class="topping">Vanille topping</a>
+                    <a href="#" data-topping="Marsh_0xFFC0CB" class="topping">marshmallows topping</a>
+                    <a href="#" data-topping="Confi_0xFFC0CB" class="topping">lijn glazuur topping</a>
+                    <a href="#" data-topping="Bar_0xFFC0CB" class="topping">Leo bar topping</a>
+                    <a href="#" data-topping="Nuts_0xFFC0CB" class="topping">Deez Nuts topping</a>
+                    <a href="#" class="topping__clear">No topping</a>
+                </div>
+                <div class="donut__brandtag">
+                    <form action="" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;">
+                        <input type="file" name="file" />
+                        <input type="submit" value="Submit" />
+                    </form>
+                    <a href="#" id="postDonut">Klaar!</a>
+                </div>
 
-        <div class="donut__dough">
-            <a href="#" data-dough="0x7B3F00" class="dough">choco dough</a>
-            <a href="#" data-dough="0xF3E5AB" class="dough">vanille dough</a>
-            <a href="#" data-dough="0x3C1F76" class="dough">blueberry dough</a>
-            <a href="#" data-dough="0x000000" class="dough">black dough</a>
+                <button id="vorige__stap">Terug</button>
+                <button id="volgende__stap" disabled>Volgende</button>
+            </div>
+
         </div>
 
-        <div class="donut__glaze">
-            <a href="#" data-glaze="0x7B3F00" class="glaze">choco glaze</a>
-            <a href="#" data-glaze="0xF3E5AB" class="glaze">vanille glaze</a>
-            <a href="#" data-glaze="0x3C1F76" class="glaze">blueberry glaze</a>
-            <a href="#" data-glaze="0x000000" class="glaze">black glaze</a>
-        </div>
 
-        <br>
 
-        <div class="donut__topping">
-            <a href="#" data-topping="Sprinkle_0x7B3F00" class="topping">choco topping</a>
-            <a href="#" data-topping="Sprinkle_0xF3E5AB" class="topping">Vanille topping</a>
-            <a href="#" data-topping="Marsh_0xFFC0CB" class="topping">marshmallows topping</a>
-            <a href="#" data-topping="Confi_0xFFC0CB" class="topping">lijn glazuur topping</a>
-            <a href="#" data-topping="Bar_0xFFC0CB" class="topping">Leo bar topping</a>
-            <a href="#" data-topping="Nuts_0xFFC0CB" class="topping">Deez Nuts topping</a>
-        </div>
 
-        <a href="#" class="topping__clear">No topping</a>
     </div>
-    <form action="" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;">
-        <input type="file" name="file" />
-        <input type="submit" value="Submit" />
-    </form>
-    <a href="#" id="postDonut">Klaar!</a>
+
     <script type="module" src="main.js"></script>
 </body>
 

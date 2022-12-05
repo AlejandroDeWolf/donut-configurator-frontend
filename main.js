@@ -93,6 +93,7 @@ glazes.forEach(button => {
             }
         }
         DonutGlaze = button.dataset.glaze;
+        unlockButton();
     });
 });
 
@@ -114,6 +115,7 @@ toppings.forEach(button => {
             }
         }
         DonutTopping = button.dataset.topping;
+        unlockButton();
     });
 });
 
@@ -125,9 +127,30 @@ function hideToppings() {
     }
 }
 
-document.querySelector('.topping__clear').addEventListener('click', () => {
-    hideToppings();
+function unlockButton() {
+    var button = document.getElementById("volgende__stap");
+    button.disabled = false;
+}
+function lockButton() {
+    var button = document.getElementById("volgende__stap");
+    button.disabled = true;
+}
+
+//on click of button id volgendestap run alert
+document.querySelector('#volgende__stap').addEventListener('click', () => {
+    if(DonutGlaze){
+        document.querySelector('.donut__topping').style.display = "block";
+        document.querySelector('.donut__glaze').style.display = "none";
+        lockButton();
+    }
+    if(DonutTopping){
+        document.querySelector('.donut__brandtag').style.display = "block";
+        document.querySelector('.donut__topping').style.display = "none";
+        lockButton();
+    }
 });
+
+
 
 function uploadBrandTag(image){
     for (var i = 0; i < Mesh.children.length; i++) {
@@ -148,6 +171,8 @@ function uploadBrandTag(image){
     }
 }
 
+
+
 window.AJAXSubmit = function (formElement) {
     if (!formElement.action) {
         console.log("fail");
@@ -163,6 +188,7 @@ window.AJAXSubmit = function (formElement) {
     } else {
         alert("Please upload a jpg or png file");
     }
+    //prevent page from reloading
 };
 window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
@@ -183,10 +209,10 @@ document.getElementById("postDonut").addEventListener("click", function (e) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            dough : "Aimane2",
-            glaze: "Aimane2",
-            topping: "Aimane2",
-            company: "Aimane2"
+            dough : DonutDough,
+            glaze: DonutGlaze,
+            topping: DonutTopping,
+            company: DonutBrandTag,
         }),
     })
     .then((response) => response.json())
