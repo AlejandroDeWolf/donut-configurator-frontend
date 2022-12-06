@@ -8,7 +8,9 @@ import {
 
 
 const configurator = document.getElementById('configurator');
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+    perserveDrawingBuffer: true,
+});
 renderer.setSize(configurator.clientWidth, configurator.clientHeight);
 renderer.setClearColor(0xFFFFFF, 1);
 
@@ -148,7 +150,13 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
     }
+    if(DonutBrandTag){
+        document.querySelector('.donut__brandtag').style.display = "none";
+        document.querySelector('.donut__bake').style.display = "block";
+        lockButton();
+    }
 });
+
 
 
 
@@ -194,6 +202,7 @@ window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
     DonutBrandTag = response.secure_url;
     uploadBrandTag(DonutBrandTag);
+    unlockButton();
 };
 
 
@@ -202,6 +211,8 @@ const api_url = "https://adorable-red-sundress.cyclic.app/donuts";
 
 //eventlistener for id postDonut prevent default
 document.getElementById("postDonut").addEventListener("click", function (e) {
+    var dataURL = renderer.domElement.toDataURL();
+    
     e.preventDefault();
     fetch(api_url, {
         method: "POST",
