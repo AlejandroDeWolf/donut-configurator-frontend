@@ -131,22 +131,26 @@ function hideToppings() {
 
 function unlockButton() {
     var button = document.getElementById("volgende__stap");
+    button.classList.remove("configurator__btn--inactive");
+    button.classList.add("configurator__btn");
     button.disabled = false;
 }
 function lockButton() {
     var button = document.getElementById("volgende__stap");
+    button.classList.remove("configurator__btn");
+    button.classList.add("configurator__btn--inactive");
     button.disabled = true;
 }
 
 //on click of button id volgendestap run alert
 document.querySelector('#volgende__stap').addEventListener('click', () => {
     if(DonutGlaze){
-        document.querySelector('.donut__topping').style.display = "block";
+        document.querySelector('.donut__topping').style.display = "grid";
         document.querySelector('.donut__glaze').style.display = "none";
         lockButton();
     }
     if(DonutTopping){
-        document.querySelector('.donut__brandtag').style.display = "block";
+        document.querySelector('.donut__brandtag').style.display = "grid";
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
     }
@@ -154,6 +158,17 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.donut__brandtag').style.display = "none";
         document.querySelector('.donut__bake').style.display = "block";
         lockButton();
+    }
+});
+
+document.querySelector('#vorige__stap').addEventListener('click', () => {
+    if (document.querySelector('.donut__topping').style.display == "block") {
+        document.querySelector('.donut__topping').style.display = "none";
+        document.querySelector('.donut__glaze').style.display = "block";
+    }
+    else if(document.querySelector('.donut__brandtag').style.display == "block"){
+        document.querySelector('.donut__brandtag').style.display = "none";
+        document.querySelector('.donut__').style.display = "block";
     }
 });
 

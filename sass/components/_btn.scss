@@ -5,6 +5,11 @@
   border-radius: 50px;
   background-color: global.$color-primary;
   color: global.$color-white;
+  border: none;
+  font-family: "Dosis", sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+  cursor: pointer;
 }
 
 .btn--active {
@@ -13,4 +18,12 @@
 
 .btn--inactive {
   background-color: global.$color-gray;
+}
+.configurator__btn{
+  width: 48%;
+}
+.configurator__btn--inactive{
+  width: 48%;
+  background-color: global.$color-gray;
+  cursor: default;
 }

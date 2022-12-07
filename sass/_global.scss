@@ -7,7 +7,7 @@ $color-secondary: #82d1e4;
 $color-accent: #f7f249;
 $color-white: #ffffff;
 $color-black: #181818;
-$color-gray: #585858;
+$color-gray: #b7b7b7;
 
 $color-error: #ffcccc;
 $color-success: #ccffcc;
@@ -39,7 +39,6 @@ h2 {
   font-family: "Dosis", sans-serif;
   font-weight: Bold;
   font-size: 2rem;
-  margin-bottom: 2rem;
 }
 
 h3 {
@@ -65,6 +64,9 @@ p {
 a {
   text-decoration: none;
   color: $color-black;
+}
+hr{
+  border: 2px solid $color-primary;
 }
 
 // ------ Layout ------
