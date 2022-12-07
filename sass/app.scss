@@ -138,29 +138,74 @@ footer {
     width: 100%;
     justify-items: center;
     overflow: scroll;
+
     a {
         width: 100%;
         height: 0;
         padding-bottom: 100%;
         border-radius: 5%;
         background-color: aquamarine;
+        background-position: center;
+        background-size: cover;
     }
-}
-
-.donut__brandtag {
-    display: none;
 }
 
 .donut__bake {
     display: none;
 }
 
-.logo__configurator{
+.logo__configurator {
     height: 8vh;
 }
-.header__configurator{
+
+.header__configurator {
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin-bottom: 10vh;
+}
+
+.configurator__steps {
+    b {
+        color: global.$color-primary;
+        font-weight: 800;
+    }
+}
+
+.donut__brandtag {
+    display: none;
+    height: 100%;
+    input[type="file"] {
+        color: transparent;
+        text-align: center;
+        width: 79%;
+    }
+    input::file-selector-button {
+        font-weight: bold;
+        color: #ffffff;
+        padding: 1.5rem 0rem;
+        border: none;
+        border-radius: 3px;
+        width: 100%;
+        background-color: #e72c70;
+        font-size: 1.5rem;
+        font-family: "Dosis", sans-serif;
+    }
+    input[type="submit"] {
+        background-color: #82d1e4;
+        padding: 1.5rem 0rem;
+        border-radius: 3px;
+        border: none;
+        width: 20%;
+        font-size: 1.5rem;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    form{
+        width: 100%;
+    }
+    //change style for disabled button
+    input[type="submit"]:disabled {
+        background-color: #e0e0e0;
+    }
 }

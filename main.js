@@ -129,6 +129,14 @@ function hideToppings() {
     }
 }
 
+
+document.querySelector('.topping__clear').addEventListener('click', () => {
+    hideToppings();
+    DonutTopping = null;
+    lockButton();
+});
+
+
 function unlockButton() {
     var button = document.getElementById("volgende__stap");
     button.classList.remove("configurator__btn--inactive");
@@ -148,29 +156,36 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.donut__topping').style.display = "grid";
         document.querySelector('.donut__glaze').style.display = "none";
         lockButton();
+        document.querySelector('.configurator__steps li:nth-child(3)').style.fontWeight = "bold";
+        document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "bold";
+        document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#e72c70";
+        document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#e72c70";
     }
     if(DonutTopping){
         document.querySelector('.donut__brandtag').style.display = "grid";
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
-    }
-    if(DonutBrandTag){
-        document.querySelector('.donut__brandtag').style.display = "none";
-        document.querySelector('.donut__bake').style.display = "block";
-        lockButton();
+        //change ul child 3 li to bold
+        document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "bold";
+        document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "bold";
     }
 });
 
-document.querySelector('#vorige__stap').addEventListener('click', () => {
-    if (document.querySelector('.donut__topping').style.display == "block") {
-        document.querySelector('.donut__topping').style.display = "none";
-        document.querySelector('.donut__glaze').style.display = "block";
-    }
-    else if(document.querySelector('.donut__brandtag').style.display == "block"){
-        document.querySelector('.donut__brandtag').style.display = "none";
-        document.querySelector('.donut__').style.display = "block";
-    }
+//if file is uploaded in from enable button
+document.querySelector('#brand__foto').addEventListener('change', () => {
+    document.querySelector('#brand__foto__upload').disabled = false;
 });
+
+// document.querySelector('#vorige__stap').addEventListener('click', () => {
+//     if (document.querySelector('.donut__topping').style.display == "block") {
+//         document.querySelector('.donut__topping').style.display = "none";
+//         document.querySelector('.donut__glaze').style.display = "block";
+//     }
+//     else if(document.querySelector('.donut__brandtag').style.display == "block"){
+//         document.querySelector('.donut__brandtag').style.display = "none";
+//         document.querySelector('.donut__').style.display = "block";
+//     }
+// });
 
 
 
