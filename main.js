@@ -165,15 +165,30 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.donut__brandtag').style.display = "grid";
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
-        //change ul child 3 li to bold
         document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "bold";
+        document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#e72c70";
+        document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#e72c70";
+    }
+    if(DonutBrandTag){
+        document.querySelector('.donut__brandtag').style.display = "none";
+        document.querySelector('.donut__bake').style.display = "block";
+        document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "bold";
+        document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
+        document.querySelector('#volgende__stap').innerHTML = "Bak Donut!";
     }
 });
 
-//if file is uploaded in from enable button
 document.querySelector('#brand__foto').addEventListener('change', () => {
     document.querySelector('#brand__foto__upload').disabled = false;
+    var file = document.querySelector('#brand__foto').files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    console.log(reader.readAsDataURL(file));
+    document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
+    document.querySelector('.image__preview').innerHTML = "";
 });
 
 // document.querySelector('#vorige__stap').addEventListener('click', () => {
@@ -226,7 +241,6 @@ window.AJAXSubmit = function (formElement) {
     } else {
         alert("Please upload a jpg or png file");
     }
-    //prevent page from reloading
 };
 window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
