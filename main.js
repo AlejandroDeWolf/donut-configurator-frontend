@@ -49,11 +49,7 @@ loader.load('images/donut2.glb', function (gltf) {
             Mesh.children[i].visible = false;
         }
     }
-    console.log(Mesh);
 });
-
-
-console.log(Mesh);
 
 
 window.addEventListener('resize', function () {
@@ -76,13 +72,17 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping+ " " + DonutBrandTag);
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + Remarks);
 }
 
 var DonutDough = "base";
 var DonutGlaze;
 var DonutTopping;
 var DonutBrandTag;
+var CompanyName;
+var DateNow = new Date().toLocaleDateString();
+var Remarks;
+
 
 // Set glaze color
 const glazes = document.querySelectorAll('.glaze');
@@ -108,7 +108,6 @@ toppings.forEach(button => {
             var fullTopping = button.dataset.topping;
             var topping = fullTopping.substring(0, fullTopping.indexOf("_"));
             var toppingName = fullTopping.substring(fullTopping.indexOf("_") + 1);
-            console.log(topping + " " + toppingName);
             if (Mesh.children[i].name.startsWith(topping)) {
                 Mesh.children[i].visible = true;
                 if (toppingName) {
@@ -120,6 +119,13 @@ toppings.forEach(button => {
         unlockButton();
     });
 });
+
+document.querySelector(".company__name").onchange = function () {
+    var name = document.querySelector(".company__name").value;
+    unlockButton();
+    CompanyName = name;
+};
+
 
 function hideToppings() {
     for (var i = 0; i < Mesh.children.length; i++) {
@@ -143,6 +149,7 @@ function unlockButton() {
     button.classList.add("configurator__btn");
     button.disabled = false;
 }
+
 function lockButton() {
     var button = document.getElementById("volgende__stap");
     button.classList.remove("configurator__btn");
@@ -152,7 +159,7 @@ function lockButton() {
 
 //on click of button id volgendestap run alert
 document.querySelector('#volgende__stap').addEventListener('click', () => {
-    if(DonutGlaze){
+    if (DonutGlaze) {
         document.querySelector('.donut__topping').style.display = "grid";
         document.querySelector('.donut__glaze').style.display = "none";
         lockButton();
@@ -161,7 +168,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#e72c70";
     }
-    if(DonutTopping){
+    if (DonutTopping) {
         document.querySelector('.donut__brandtag').style.display = "grid";
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
@@ -170,12 +177,16 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#e72c70";
     }
-    if(DonutBrandTag){
+    if (DonutBrandTag) {
         document.querySelector('.donut__brandtag').style.display = "none";
         document.querySelector('.donut__bake').style.display = "block";
         document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
-        document.querySelector('#volgende__stap').innerHTML = "Bak Donut!";
+        document.querySelector('#volgende__stap').innerHTML = "Bake Donut!";
+    }
+    if (CompanyName) {
+        postDonut();
+        alert("Donut is baked!");
     }
 });
 
@@ -186,9 +197,9 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
     reader.onloadend = function () {
         document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
     }
-    console.log(reader.readAsDataURL(file));
     document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
     document.querySelector('.image__preview').innerHTML = "";
+    reader.readAsDataURL(file);
 });
 
 // document.querySelector('#vorige__stap').addEventListener('click', () => {
@@ -205,21 +216,21 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
 
 
 
-function uploadBrandTag(image){
+function uploadBrandTag(image) {
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name.startsWith("Naam")) {
             Mesh.children[i].visible = true;
             var texture = new THREE.TextureLoader().load(image);
-            Mesh.children[i].material.map = texture; 
+            Mesh.children[i].material.map = texture;
             Mesh.children[i].material.map.wrapS = THREE.RepeatWrapping;
             Mesh.children[i].material.map.wrapT = THREE.RepeatWrapping;
-            Mesh.children[i].material.map.offset.set( 0, 0 );
-            Mesh.children[i].material.map.center.set( 0, 0 );
-            Mesh.children[i].material.map.repeat.set( 1, 1 );
+            Mesh.children[i].material.map.offset.set(0, 0);
+            Mesh.children[i].material.map.center.set(0, 0);
+            Mesh.children[i].material.map.repeat.set(1, 1);
             Mesh.children[i].material.map.rotation = 0;
             Mesh.children[i].material.map.flipY = false;
-            Mesh.children[i].material.map.needsUpdate = true;  
-            Mesh.children[i].rotation.y = Math.PI / 1.2;
+            Mesh.children[i].material.map.needsUpdate = true;
+            Mesh.children[i].rotation.y = Math.PI / 1.3;
         }
     }
 }
@@ -253,26 +264,32 @@ window.ajaxSuccess = function () {
 
 const api_url = "https://adorable-red-sundress.cyclic.app/donuts";
 
-//eventlistener for id postDonut prevent default
-document.getElementById("postDonut").addEventListener("click", function (e) {
+//create function with prevent default
+function postDonut() {
     var dataURL = renderer.domElement.toDataURL();
-    
-    e.preventDefault();
     fetch(api_url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            dough : DonutDough,
-            glaze: DonutGlaze,
-            topping: DonutTopping,
-            company: DonutBrandTag,
-        }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-    });
-});
-       
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                dough: DonutDough,
+                glaze: DonutGlaze,
+                topping: DonutTopping,
+                company: CompanyName,
+                brandtag: DonutBrandTag,
+                date: DateNow,
+                remarks: document.querySelector('.donut__remarks').value,
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            donutBaked();
+        });
+}
+
+
+function donutBaked() {
+    console.log("Donut is baked!");
+}
