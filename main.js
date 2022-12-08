@@ -138,8 +138,8 @@ function hideToppings() {
 
 document.querySelector('.topping__clear').addEventListener('click', () => {
     hideToppings();
-    DonutTopping = null;
-    lockButton();
+    DonutTopping = "none";
+    unlockButton();
 });
 
 
