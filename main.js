@@ -32,12 +32,14 @@ controls.minDistance = 4;
 controls.maxDistance = 5;
 
 var Mesh = null;
+var loaded = false;
 
 // Load the model
 const loader = new GLTFLoader();
 loader.load('images/donut2.glb', function (gltf) {
     Mesh = gltf.scene;
     Mesh.rotation.x = Math.PI / 4;
+    Mesh.position.y = 1.7;
     scene.add(Mesh);
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name.startsWith("Doughnut") || Mesh.children[i].name.startsWith("Glaze")) {
@@ -72,6 +74,9 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
+    if(loaded == true && Mesh.position.y > 0){
+        Mesh.position.y -= 0.009; 
+    }
     console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + Remarks);
 }
 
@@ -299,6 +304,7 @@ window.addEventListener("load", function () {
             document.querySelector('.loading__screen').style.display = "none";
         }, 200);
     }, 2000);
+    loaded = true;
 });
 
 function donutBaked() {
