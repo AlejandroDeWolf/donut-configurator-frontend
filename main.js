@@ -42,7 +42,7 @@ loader.load('images/donut2.glb', function (gltf) {
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name.startsWith("Doughnut") || Mesh.children[i].name.startsWith("Glaze")) {
             if (Mesh.children[i].name.startsWith("Doughnut")) {
-                Mesh.children[i].material.color.setHex(0xf7e4c4);
+                Mesh.children[i].material.color.setHex(0xEEC783);
             }
             Mesh.children[i].visible = true;
         } else {
@@ -289,6 +289,17 @@ function postDonut() {
         });
 }
 
+
+//window on load
+window.addEventListener("load", function () {
+    setInterval(function () {
+        document.querySelector('body').style.overflow = "auto";
+        document.querySelector('.loading__screen').classList.add("loading__screen__animation");
+        setTimeout(function () {
+            document.querySelector('.loading__screen').style.display = "none";
+        }, 200);
+    }, 2000);
+});
 
 function donutBaked() {
     console.log("Donut is baked!");
