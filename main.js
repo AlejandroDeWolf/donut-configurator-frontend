@@ -75,7 +75,8 @@ function update() {
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
     if(loaded == true && Mesh.position.y > 0){
-        Mesh.position.y -= 0.009; 
+        Mesh.position.y -= 0.01;
+        Mesh.position.z += 0.003;
     }
     console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + Remarks);
 }
