@@ -6,10 +6,9 @@ import {
     GLTFLoader
 } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-
 const configurator = document.getElementById('configurator');
 const renderer = new THREE.WebGLRenderer({
-    perserveDrawingBuffer: true,
+    antialias: true
 });
 renderer.setSize(configurator.clientWidth, configurator.clientHeight);
 renderer.setClearColor(0xFFFFFF, 1);
@@ -21,7 +20,7 @@ const ASPECT = configurator.clientWidth / configurator.clientHeight;
 const NEAR = 0.1;
 const FAR = 1000;
 const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-camera.position.z = 5;
+camera.position.z = 4;
 
 const scene = new THREE.Scene();
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -39,7 +38,6 @@ const loader = new GLTFLoader();
 loader.load('images/donut2.glb', function (gltf) {
     Mesh = gltf.scene;
     Mesh.rotation.x = Math.PI / 4;
-    Mesh.position.y = 1.7;
     scene.add(Mesh);
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name.startsWith("Doughnut") || Mesh.children[i].name.startsWith("Glaze")) {
@@ -74,11 +72,7 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    if(loaded == true && Mesh.position.y > 0){
-        Mesh.position.y -= 0.01;
-        Mesh.position.z += 0.003;
-    }
-    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + Remarks);
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks+ " " + DonutSnapshot);
 }
 
 var DonutDough = "base";
@@ -87,7 +81,9 @@ var DonutTopping;
 var DonutBrandTag;
 var CompanyName;
 var DateNow = new Date().toLocaleDateString();
-var Remarks;
+var DonutRemarks;
+var DonutSnapshot;
+var SnapshotDone = false;
 
 
 // Set glaze color
@@ -127,9 +123,11 @@ toppings.forEach(button => {
 });
 
 document.querySelector(".company__name").onchange = function () {
-    var name = document.querySelector(".company__name").value;
+    CompanyName = document.querySelector(".company__name").value;
     unlockButton();
-    CompanyName = name;
+};
+document.querySelector(".donut__remarks").onchange = function () {
+    DonutRemarks = document.querySelector(".donut__remarks").value;
 };
 
 
@@ -191,8 +189,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('#volgende__stap').innerHTML = "Bake Donut!";
     }
     if (CompanyName) {
-        postDonut();
-        alert("Donut is baked!");
+        snapshot();
     }
 });
 
@@ -285,7 +282,8 @@ function postDonut() {
                 company: CompanyName,
                 brandtag: DonutBrandTag,
                 date: DateNow,
-                remarks: document.querySelector('.donut__remarks').value,
+                remarks: DonutRemarks,
+                snapshot: DonutSnapshot,
             }),
         })
         .then((response) => response.json())
@@ -311,3 +309,23 @@ window.addEventListener("load", function () {
 function donutBaked() {
     console.log("Donut is baked!");
 }
+
+function snapshot() {
+        var img = new Image();
+        renderer.render(scene, camera);
+        img.src = renderer.domElement.toDataURL();
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ajaxSuccessScreen;
+        xhr.open("post", "https://api.cloudinary.com/v1_1/dck3erw0v/image/upload");
+        let dataPreset = new FormData();
+        dataPreset.append("file", img.src);
+        dataPreset.append("upload_preset", "donuts");
+        xhr.send(dataPreset);
+};
+
+function ajaxSuccessScreen(){
+    let response = JSON.parse(this.responseText);
+    DonutSnapshot = response.secure_url;
+    postDonut();
+}  
+
