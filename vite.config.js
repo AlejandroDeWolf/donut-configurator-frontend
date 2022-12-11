@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         configurator: resolve(__dirname, 'configurator.html'),
+        donut: resolve(__dirname, 'donut.html'),
       }
     }
   }

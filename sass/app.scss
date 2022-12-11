@@ -87,6 +87,13 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        width: 90%;
+    }
+    @media (max-width: 980px) {
+        width: 90%;
+    }
 }
 
 #configurator {
