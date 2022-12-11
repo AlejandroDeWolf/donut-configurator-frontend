@@ -84,6 +84,7 @@ var DateNow = new Date().toLocaleDateString();
 var DonutRemarks;
 var DonutSnapshot;
 var SnapshotDone = false;
+var DonutID;
 
 
 // Set glaze color
@@ -289,6 +290,8 @@ function postDonut() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            DonutID = data._id;
+            console.log(DonutID);
             donutBaked();
         });
 }
@@ -329,3 +332,8 @@ function ajaxSuccessScreen(){
     postDonut();
 }  
 
+
+//event listener for the button share__donut
+document.querySelector('.share__donut').addEventListener('click', () => {
+    window.location.href = "donut.html?id=" + DonutID;
+});
