@@ -10,8 +10,7 @@ var url = window.location.href;
 var id = url.substring(url.lastIndexOf('=') + 1);
 
 var p = document.createElement("p");
-p.innerHTML = "ID: " + id;
-document.body.appendChild(p);
+
 
 let DonutGlaze;
 let DonutTopping;
@@ -128,3 +127,14 @@ function uploadBrandTag(image) {
         }
     }
 }
+
+window.addEventListener("load", function () {
+    setInterval(function () {
+        document.querySelector('body').style.overflow = "auto";
+        document.querySelector('.loading__screen').classList.add("loading__screen__animation");
+        setTimeout(function () {
+            document.querySelector('.loading__screen').style.display = "none";
+        }, 200);
+    }, 2000);
+    loaded = true;
+});
