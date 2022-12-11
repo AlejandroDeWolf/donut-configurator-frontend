@@ -47,6 +47,9 @@ loader.load('images/donut2.glb', function (gltf) {
             if (Mesh.children[i].name.startsWith("Doughnut")) {
                 Mesh.children[i].material.color.setHex(0xEEC783);
             }
+            if (Mesh.children[i].name.startsWith("Glaze")) {
+                Mesh.children[i].material.color.setHex(0xff5cce);
+            }
             Mesh.children[i].visible = true;
         } else {
             Mesh.children[i].visible = false;
@@ -96,13 +99,21 @@ const glazes = document.querySelectorAll('.glaze');
 glazes.forEach(button => {
     button.addEventListener('click', () => {
         var glaze = button.dataset.glaze;
-        for (var i = 0; i < Mesh.children.length; i++) {
-            if (Mesh.children[i].name.startsWith("Glaze")) {
-                Mesh.children[i].material.color.setHex(glaze);
+        if (glaze == "NULL") {
+            for (var i = 0; i < Mesh.children.length; i++) {
+                if (Mesh.children[i].name.startsWith("Glaze")) {
+                    Mesh.children[i].visible = false;
+                }
+            }
+        } else {
+            for (var i = 0; i < Mesh.children.length; i++) {
+                if (Mesh.children[i].name.startsWith("Glaze")) {
+                    Mesh.children[i].material.color.setHex(glaze);
+                }
             }
         }
         DonutGlaze = button.dataset.glaze;
-        message = button.dataset.glaze;
+        message = button.dataset.name;
         popup(3);
         unlockButton();
     });
@@ -180,7 +191,7 @@ function popup(color) {
     document.querySelector('.message__div').style.opacity = "1";
     setTimeout(function () {
         document.querySelector('.message__div').style.opacity = "0";
-    }, 2000);
+    }, 3000);
     document.querySelector('.message__div').innerHTML = message;
 }
 
@@ -224,17 +235,25 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
 });
 
 document.querySelector('#brand__foto').addEventListener('change', () => {
-    document.querySelector('#brand__foto__upload').disabled = false;
     var file = document.querySelector('#brand__foto').files[0];
     var reader = new FileReader();
-    reader.onloadend = function () {
-        document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
+    if (file.type != "image/jpeg" && file.type != "image/png") {
+        message = "Bestand moet een jpg of png zijn.";
+        popup(2);
+    } else if (file.size > 10000000) {
+        message = "Bestand mag niet groter dan 10mb zijn!";
+        popup(2);
+    } else {
+        document.querySelector('#brand__foto__upload').disabled = false;
+        reader.onloadend = function () {
+            document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
+        }
+        document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
+        document.querySelector('.image__preview').innerHTML = "";
+        reader.readAsDataURL(file);
+        message = "Foto is geupload!";
+        popup(1);
     }
-    document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
-    document.querySelector('.image__preview').innerHTML = "";
-    reader.readAsDataURL(file);
-    message = "Foto is geupload!";
-    popup(1);
 });
 
 // document.querySelector('#vorige__stap').addEventListener('click', () => {
@@ -285,7 +304,8 @@ window.AJAXSubmit = function (formElement) {
     if (dataPreset.get("file").type == "image/jpeg" || dataPreset.get("file").type == "image/png") {
         xhr.send(dataPreset);
     } else {
-        alert("Please upload a jpg or png file");
+        message = "Upload een jpg of png bestand!";
+        popup(2);
     }
 };
 window.ajaxSuccess = function () {
