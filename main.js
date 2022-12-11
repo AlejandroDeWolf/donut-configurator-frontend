@@ -88,6 +88,7 @@ var DonutRemarks;
 var DonutSnapshot;
 var SnapshotDone = false;
 var DonutID;
+var message;
 
 
 // Set glaze color
@@ -101,6 +102,8 @@ glazes.forEach(button => {
             }
         }
         DonutGlaze = button.dataset.glaze;
+        message = button.dataset.glaze;
+        popup(3);
         unlockButton();
     });
 });
@@ -122,6 +125,8 @@ toppings.forEach(button => {
             }
         }
         DonutTopping = button.dataset.topping;
+        message = button.dataset.name;
+        popup(3);
         unlockButton();
     });
 });
@@ -134,6 +139,12 @@ document.querySelector(".donut__remarks").onchange = function () {
     DonutRemarks = document.querySelector(".donut__remarks").value;
 };
 
+//if pressed on button disabled show alert 
+document.querySelector('#volgende__stap').addEventListener('click', () => {
+    if (document.querySelector('#volgende__stap').disabled == true) {
+        alert("Please select a dough, glaze and topping");
+    }
+});
 
 function hideToppings() {
     for (var i = 0; i < Mesh.children.length; i++) {
@@ -156,6 +167,21 @@ function unlockButton() {
     button.classList.remove("configurator__btn--inactive");
     button.classList.add("configurator__btn");
     button.disabled = false;
+}
+
+function popup(color) {
+    if (color == 1) {
+        document.querySelector('.message__div').style.backgroundColor = "#4CAF50";
+    } else if (color == 2) {
+        document.querySelector('.message__div').style.backgroundColor = "#f44336";
+    } else {
+        document.querySelector('.message__div').style.backgroundColor = "#2196F3";
+    }
+    document.querySelector('.message__div').style.opacity = "1";
+    setTimeout(function () {
+        document.querySelector('.message__div').style.opacity = "0";
+    }, 2000);
+    document.querySelector('.message__div').innerHTML = message;
 }
 
 function lockButton() {
@@ -207,6 +233,8 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
     document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
     document.querySelector('.image__preview').innerHTML = "";
     reader.readAsDataURL(file);
+    message = "Foto is geupload!";
+    popup(1);
 });
 
 // document.querySelector('#vorige__stap').addEventListener('click', () => {
@@ -265,6 +293,8 @@ window.ajaxSuccess = function () {
     DonutBrandTag = response.secure_url;
     uploadBrandTag(DonutBrandTag);
     unlockButton();
+    message = "Brandtag is geupload!";
+    popup(3);
 };
 
 
@@ -273,6 +303,8 @@ const api_url = "https://adorable-red-sundress.cyclic.app/donuts";
 
 //create function with prevent default
 function postDonut() {
+    message = "Je donut wordt gebakken! Even geduld aub...";
+    popup(3);
     var dataURL = renderer.domElement.toDataURL();
     fetch(api_url, {
             method: "POST",
@@ -296,6 +328,8 @@ function postDonut() {
             DonutID = data._id;
             console.log(DonutID);
             donutBaked();
+            message = "Donut is gebakken!";
+            popup(1);
             const jsConfetti = new JSConfetti()
             jsConfetti.addConfetti({
                 confettiColors: [
@@ -304,6 +338,8 @@ function postDonut() {
             })
         });
 }
+
+
 
 
 //window on load
