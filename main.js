@@ -6,6 +6,9 @@ import {
     GLTFLoader
 } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import JSConfetti from 'js-confetti'
+
+
 const configurator = document.getElementById('configurator');
 const renderer = new THREE.WebGLRenderer({
     antialias: true
@@ -72,7 +75,7 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks+ " " + DonutSnapshot);
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks + " " + DonutSnapshot);
 }
 
 var DonutDough = "base";
@@ -293,6 +296,12 @@ function postDonut() {
             DonutID = data._id;
             console.log(DonutID);
             donutBaked();
+            const jsConfetti = new JSConfetti()
+            jsConfetti.addConfetti({
+                confettiColors: [
+                    '#E72C70', '#E72C70', '#82D1E4', '#F7F249',
+                ],
+            })
         });
 }
 
@@ -304,34 +313,35 @@ window.addEventListener("load", function () {
         document.querySelector('.loading__screen').classList.add("loading__screen__animation");
         setTimeout(function () {
             document.querySelector('.loading__screen').style.display = "none";
-        }, 200);
+        }, 350);
     }, 2000);
     loaded = true;
 });
+
 
 function donutBaked() {
     console.log("Donut is baked!");
 }
 
 function snapshot() {
-        var img = new Image();
-        renderer.render(scene, camera);
-        img.src = renderer.domElement.toDataURL();
-        let xhr = new XMLHttpRequest();
-        xhr.onload = ajaxSuccessScreen;
-        xhr.open("post", "https://api.cloudinary.com/v1_1/dck3erw0v/image/upload");
-        let dataPreset = new FormData();
-        dataPreset.append("file", img.src);
-        dataPreset.append("upload_preset", "donuts");
-        xhr.send(dataPreset);
+    var img = new Image();
+    renderer.render(scene, camera);
+    img.src = renderer.domElement.toDataURL();
+    let xhr = new XMLHttpRequest();
+    xhr.onload = ajaxSuccessScreen;
+    xhr.open("post", "https://api.cloudinary.com/v1_1/dck3erw0v/image/upload");
+    let dataPreset = new FormData();
+    dataPreset.append("file", img.src);
+    dataPreset.append("upload_preset", "donuts");
+    xhr.send(dataPreset);
 };
 
-function ajaxSuccessScreen(){
+function ajaxSuccessScreen() {
     let response = JSON.parse(this.responseText);
     DonutSnapshot = response.secure_url;
     postDonut();
-}  
 
+}
 
 //event listener for the button share__donut
 document.querySelector('.share__donut').addEventListener('click', () => {
