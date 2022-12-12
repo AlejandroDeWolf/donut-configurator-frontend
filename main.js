@@ -79,13 +79,14 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks + " " + DonutSnapshot);
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks + " " + DonutSnapshot+" "+DonutBrandTagType);
 }
 
 var DonutDough = "base";
 var DonutGlaze;
 var DonutTopping;
 var DonutBrandTag;
+var DonutBrandTagType = "Naam";
 var CompanyName;
 var DateNow = new Date().toLocaleDateString();
 var DonutRemarks;
@@ -117,6 +118,17 @@ glazes.forEach(button => {
         message = button.dataset.name;
         popup(3);
         unlockButton();
+    });
+});
+
+const tags = document.querySelectorAll('.tag');
+tags.forEach(button => {
+    button.addEventListener('click', () => {
+        DonutBrandTagType = button.dataset.tag;
+        message = DonutBrandTagType+" Tag type:"+DonutBrandTag;
+        popup(3);
+        hideBrandTag();
+        uploadBrandTag(DonutBrandTag);
     });
 });
 
@@ -215,7 +227,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#e72c70";
     }
     if (DonutTopping) {
-        document.querySelector('.donut__brandtag').style.display = "grid";
+        document.querySelector('.donut__brandtag').style.display = "block";
         document.querySelector('.donut__topping').style.display = "none";
         lockButton();
         document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "bold";
@@ -245,6 +257,7 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
         message = "Bestand mag niet groter dan 10mb zijn!";
         popup(2);
     } else {
+        lockBrandTagButton();
         document.querySelector('#brand__foto__upload').disabled = false;
         reader.onloadend = function () {
             document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
@@ -269,27 +282,51 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
 // });
 
 
-
-
-function uploadBrandTag(image) {
-    console.log(Mesh.children);
+function hideBrandTag() {
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name == "Naam") {
+            Mesh.children[i].visible = false;
+        }
+        else if (Mesh.children[i].name == "Naam2") {
+            Mesh.children[i].visible = false;
+        }
+        else if (Mesh.children[i].name == "Naam3") {
+            Mesh.children[i].visible = false;
+        }
+    }
+}
+
+function uploadBrandTag(image) {
+    console.log(DonutBrandTagType+" is visible"+image);
+    for (var i = 0; i < Mesh.children.length; i++) {
+        if (Mesh.children[i].name == DonutBrandTagType) {
             Mesh.children[i].visible = true;
             var texture = new THREE.TextureLoader().load(image);
             Mesh.children[i].material.map = texture;
             Mesh.children[i].material.map.wrapS = THREE.RepeatWrapping;
             Mesh.children[i].material.map.wrapT = THREE.RepeatWrapping;
+            Mesh.children[i].material.transparent = true;
             Mesh.children[i].material.map.offset.set(0, 0);
             Mesh.children[i].material.map.center.set(0, 0);
             Mesh.children[i].material.map.repeat.set(1, 1);
             Mesh.children[i].material.map.rotation = 0;
             Mesh.children[i].material.map.flipY = false;
-            Mesh.children[i].material.transparent = true;
             Mesh.children[i].material.map.needsUpdate = true;
             Mesh.children[i].rotation.y = Math.PI / 1.3;
         }
+
     }
+    unlockBrandTagButton();
+    unlockButton();
+}
+
+function unlockBrandTagButton() {
+    document.querySelector('.image__preview').style.display = "none";
+    document.querySelector('.brandtag__options').style.display = "flex";
+}
+function lockBrandTagButton() {
+    document.querySelector('.image__preview').style.display = "block";
+    document.querySelector('.brandtag__options').style.display = "none";
 }
 
 
@@ -317,7 +354,6 @@ window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
     DonutBrandTag = response.secure_url;
     uploadBrandTag(DonutBrandTag);
-    showBg();
     unlockButton();
     message = "Brandtag is geupload!";
     popup(3);
@@ -343,6 +379,7 @@ function postDonut() {
                 topping: DonutTopping,
                 company: CompanyName,
                 brandtag: DonutBrandTag,
+                brandtagtype: DonutBrandTagType,
                 date: DateNow,
                 remarks: DonutRemarks,
                 snapshot: DonutSnapshot,
@@ -374,7 +411,7 @@ window.addEventListener("load", function () {
         document.querySelector('body').style.overflow = "auto";
         document.querySelector('.loading__screen').classList.add("loading__screen__animation");
         setTimeout(function () {
-            document.querySelector('.loading__screen').remove();
+            document.querySelector('.loading__screen').style.display = "none";
         }, 450);
     }, 2000);
     loaded = true;
