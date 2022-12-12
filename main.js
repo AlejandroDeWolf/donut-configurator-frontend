@@ -14,7 +14,8 @@ const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
 renderer.setSize(configurator.clientWidth, configurator.clientHeight);
-renderer.setClearColor(0xFFFFFF, 1);
+renderer.setClearColor(0xffffff);
+
 
 configurator.appendChild(renderer.domElement);
 
@@ -271,8 +272,9 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
 
 
 function uploadBrandTag(image) {
+    console.log(Mesh.children);
     for (var i = 0; i < Mesh.children.length; i++) {
-        if (Mesh.children[i].name.startsWith("Naam")) {
+        if (Mesh.children[i].name == "Naam") {
             Mesh.children[i].visible = true;
             var texture = new THREE.TextureLoader().load(image);
             Mesh.children[i].material.map = texture;
@@ -283,11 +285,14 @@ function uploadBrandTag(image) {
             Mesh.children[i].material.map.repeat.set(1, 1);
             Mesh.children[i].material.map.rotation = 0;
             Mesh.children[i].material.map.flipY = false;
+            Mesh.children[i].material.transparent = true;
             Mesh.children[i].material.map.needsUpdate = true;
             Mesh.children[i].rotation.y = Math.PI / 1.3;
         }
     }
 }
+
+
 
 
 
@@ -312,6 +317,7 @@ window.ajaxSuccess = function () {
     let response = JSON.parse(this.responseText);
     DonutBrandTag = response.secure_url;
     uploadBrandTag(DonutBrandTag);
+    showBg();
     unlockButton();
     message = "Brandtag is geupload!";
     popup(3);
@@ -368,8 +374,8 @@ window.addEventListener("load", function () {
         document.querySelector('body').style.overflow = "auto";
         document.querySelector('.loading__screen').classList.add("loading__screen__animation");
         setTimeout(function () {
-            document.querySelector('.loading__screen').style.display = "none";
-        }, 350);
+            document.querySelector('.loading__screen').remove();
+        }, 450);
     }, 2000);
     loaded = true;
 });
