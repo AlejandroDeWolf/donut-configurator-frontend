@@ -343,8 +343,14 @@ footer {
 }
 .donut__finished{
     display: none;
+    width: 15%;
+    margin: 0px auto;
     height: 100%;
-    .Meme{
-        background-image: url("https://media.tenor.com/nPH5DKvrjuwAAAAC/homer-simpson.gif");
+    justify-content: space-around;
+    img{
+        width: 30%;
+    }
+    a{
+        text-align: center;
     }
 }

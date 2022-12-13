@@ -247,7 +247,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('#container').style.justifyContent = "center";
         document.querySelector('#configurator__options').innerHTML = "";
         document.querySelector('#configurator__options').style.width = "0";
-        document.querySelector('.donut__finished').style.display = "block";
+        document.querySelector('.donut__finished').style.display = "flex";
         renderer.setSize(configurator.clientWidth, configurator.clientHeight);
         camera.aspect = configurator.clientWidth / configurator.clientHeight;
         camera.updateProjectionMatrix();
@@ -454,5 +454,21 @@ function ajaxSuccessScreen() {
 
 //event listener for the button share__donut
 document.querySelector('.share__donut').addEventListener('click', () => {
-    window.location.href = "donut.html?id=" + DonutID;
+    var link = "https://donuttello.netlify.app/donut.html?id=" + DonutID;
+    navigator.clipboard.writeText(link);
+    message = "Link is gekopieerd naar je clipboard!";
+    popup(3);
+});
+
+//event listener for the button screenshot__donut
+document.querySelector('.screenshot__donut').addEventListener('click', () => {
+    var img = new Image();
+    renderer.render(scene, camera);
+    img.src = renderer.domElement.toDataURL();
+    var link = document.createElement('a');
+    link.download = 'donut.png';
+    link.href = img.src;
+    link.click();
+    message = "Donut is screenshot is opgeslagen!";
+    popup(3);
 });
