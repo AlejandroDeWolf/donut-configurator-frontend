@@ -163,12 +163,6 @@ document.querySelector(".donut__remarks").onchange = function () {
     DonutRemarks = document.querySelector(".donut__remarks").value;
 };
 
-//if pressed on button disabled show alert 
-document.querySelector('#volgende__stap').addEventListener('click', () => {
-    if (document.querySelector('#volgende__stap').disabled == true) {
-        alert("Please select a dough, glaze and topping");
-    }
-});
 
 function hideToppings() {
     for (var i = 0; i < Mesh.children.length; i++) {
@@ -225,6 +219,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#e72c70";
+        document.querySelector('.options__title').innerHTML = "Kies een topping";
     }
     if (DonutTopping) {
         document.querySelector('.donut__brandtag').style.display = "block";
@@ -234,6 +229,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#e72c70";
+        document.querySelector('.options__title').innerHTML = "Upload een brandtag";
     }
     if (DonutBrandTag) {
         document.querySelector('.donut__brandtag').style.display = "none";
@@ -241,6 +237,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
         document.querySelector('#volgende__stap').innerHTML = "Bake Donut!";
+        document.querySelector('.options__title').innerHTML = "Bak je donut!";
     }
     if (CompanyName) {
         snapshot();
@@ -327,9 +324,6 @@ function lockBrandTagButton() {
     document.querySelector('.image__preview').style.display = "block";
     document.querySelector('.brandtag__options').style.display = "none";
 }
-
-
-
 
 
 window.AJAXSubmit = function (formElement) {
@@ -440,7 +434,6 @@ function ajaxSuccessScreen() {
     let response = JSON.parse(this.responseText);
     DonutSnapshot = response.secure_url;
     postDonut();
-
 }
 
 //event listener for the button share__donut
