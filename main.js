@@ -314,7 +314,6 @@ function uploadBrandTag(image) {
             Mesh.children[i].material.map.needsUpdate = true;
             Mesh.children[i].rotation.y = Math.PI / 1.3;
         }
-
     }
     unlockBrandTagButton();
     unlockButton();
@@ -383,6 +382,7 @@ function postDonut() {
                 date: DateNow,
                 remarks: DonutRemarks,
                 snapshot: DonutSnapshot,
+                status: 1,
             }),
         })
         .then((response) => response.json())
@@ -415,6 +415,7 @@ window.addEventListener("load", function () {
         }, 450);
     }, 2000);
     loaded = true;
+    document.querySelector('body').style.overflow = "auto";
 });
 
 

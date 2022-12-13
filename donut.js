@@ -72,6 +72,7 @@ function createDonut(donut) {
             if (Mesh.children[i].name != "Glaze" && Mesh.children[i].name != "Doughnut" && Mesh.children[i].name != topping && Mesh.children[i].name != "Naam") {
                 Mesh.children[i].visible = false;
             } else if (Mesh.children[i].name == "Naam") {
+                hideBrandTag();
                 uploadBrandTag(donut.brandtag);
             }
             else if (Mesh.children[i].name == topping) {
@@ -111,7 +112,7 @@ scene.add(ambientLight);
 
 function uploadBrandTag(image) {
     for (var i = 0; i < Mesh.children.length; i++) {
-        if (Mesh.children[i].name.startsWith("Naam")) {
+        if (Mesh.children[i].name == "Naam") {
             Mesh.children[i].visible = true;
             var texture = new THREE.TextureLoader().load(image);
             Mesh.children[i].material.map = texture;
@@ -124,6 +125,20 @@ function uploadBrandTag(image) {
             Mesh.children[i].material.map.flipY = false;
             Mesh.children[i].material.map.needsUpdate = true;
             Mesh.children[i].rotation.y = Math.PI / 1.3;
+        }
+    }
+}
+
+function hideBrandTag() {
+    for (var i = 0; i < Mesh.children.length; i++) {
+        if (Mesh.children[i].name == "Naam") {
+            Mesh.children[i].visible = false;
+        }
+        else if (Mesh.children[i].name == "Naam2") {
+            Mesh.children[i].visible = false;
+        }
+        else if (Mesh.children[i].name == "Naam3") {
+            Mesh.children[i].visible = false;
         }
     }
 }

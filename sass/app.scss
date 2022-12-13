@@ -8,9 +8,11 @@
     justify-content: space-between;
     height: 100vh;
 }
-body{
+
+body {
     overflow: hidden;
 }
+
 ::-webkit-scrollbar {
     width: 0;
     height: 0;
@@ -63,8 +65,12 @@ nav {
         width: 45%;
 
         img {
-            width: 100%;
+            width: 60%;
         }
+    }
+
+    @media (min-width: 1400px) {
+        margin: 2rem 8rem;
     }
 }
 
@@ -87,10 +93,12 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
     @media (max-width: 768px) {
         flex-direction: column;
         width: 90%;
     }
+
     @media (max-width: 980px) {
         width: 90%;
     }
@@ -129,6 +137,7 @@ footer {
     width: 100%;
     justify-items: center;
     overflow: scroll;
+
     a {
         width: 100%;
         height: 0;
@@ -182,11 +191,13 @@ footer {
 .donut__brandtag {
     display: none;
     height: 100%;
+
     input[type="file"] {
         color: transparent;
         text-align: center;
         width: 79%;
     }
+
     input::file-selector-button {
         font-weight: bold;
         color: #ffffff;
@@ -198,6 +209,7 @@ footer {
         font-size: 1.5rem;
         font-family: "Dosis", sans-serif;
     }
+
     input[type="submit"] {
         background-color: #82d1e4;
         padding: 1.5rem 0rem;
@@ -208,14 +220,17 @@ footer {
         color: #ffffff;
         font-weight: bold;
     }
-    form{
+
+    form {
         width: 100%;
     }
+
     input[type="submit"]:disabled {
         background-color: #e0e0e0;
     }
 }
-.image__preview{
+
+.image__preview {
     width: 100%;
     //height is equal to width/2
     height: 0;
@@ -230,7 +245,8 @@ footer {
     background-position: center;
     transition: 1s ease;
 }
-.brandtag__options{
+
+.brandtag__options {
     display: none;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -239,6 +255,7 @@ footer {
     justify-items: center;
     overflow: scroll;
     height: 30vh;
+
     a {
         width: 100%;
         height: 0;
@@ -246,10 +263,13 @@ footer {
         border-radius: 5%;
     }
 }
-.donut__bake{
+
+.donut__bake {
     width: 100%;
     height: 100%;
-    input, textarea{
+
+    input,
+    textarea {
         width: 100%;
         height: 20%;
         border: none;
@@ -258,37 +278,46 @@ footer {
         font-weight: bold;
         border-radius: 3px;
     }
+
     //input and textarea focus
-    input:focus, textarea:focus{
+    input:focus,
+    textarea:focus {
         outline: none;
         border-bottom: 4px solid#82d1e4;
         transition: 0.4s ease;
     }
-    textarea{
+
+    textarea {
         margin-top: 2%;
         height: 50%;
     }
-    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
         color: #b1b1b1;
         font-weight: 100;
     }
 }
-.loading__screen{
+
+.loading__screen {
     background-color: #e72c70;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    img{
+
+    img {
         width: 8%;
     }
 }
-.loading__screen__animation{
+
+.loading__screen__animation {
     opacity: 1;
     animation: fadeOut 0.7s forwards;
 }
-.message__div{
+
+.message__div {
     position: fixed;
     bottom: 5vh;
     left: 37.5%;
@@ -299,10 +328,12 @@ footer {
     opacity: 0;
     transition: 1s ease;
 }
+
 @keyframes fadeOut {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
