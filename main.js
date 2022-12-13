@@ -91,6 +91,7 @@ var DonutTopping;
 var DonutBrandTag;
 var DonutBrandTagType = "Naam";
 var CompanyName;
+var CompanyContact;
 var DateNow = new Date().toLocaleDateString();
 var DonutRemarks;
 var DonutSnapshot;
@@ -161,12 +162,34 @@ toppings.forEach(button => {
 
 document.querySelector(".company__name").onchange = function () {
     CompanyName = document.querySelector(".company__name").value;
-    unlockButton();
+    unlockButtonForm();
 };
 document.querySelector(".donut__remarks").onchange = function () {
     DonutRemarks = document.querySelector(".donut__remarks").value;
+    unlockButtonForm();
+};
+document.querySelector(".company__contact").onchange = function () {
+    CompanyContact = document.querySelector(".company__contact").value;
+    unlockButtonForm();
 };
 
+function unlockButtonForm() {
+    if (CompanyName && DonutRemarks && CompanyContact) {
+        //check if  is valid mail
+        if (validEmail(CompanyContact)) {
+            unlockButton();
+        }
+        else{
+            message = "Vul een geldig e-mailadres in";
+            popup(3);
+        }
+    }
+}
+
+function validEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
 
 function hideToppings() {
     for (var i = 0; i < Mesh.children.length; i++) {
@@ -192,6 +215,7 @@ function unlockButton() {
 }
 
 function popup(color) {
+    document.querySelector('.message__div').style.zIndex = "2";
     if (color == 1) {
         document.querySelector('.message__div').style.backgroundColor = "#4CAF50";
     } else if (color == 2) {
@@ -202,6 +226,7 @@ function popup(color) {
     document.querySelector('.message__div').style.opacity = "1";
     setTimeout(function () {
         document.querySelector('.message__div').style.opacity = "0";
+        document.querySelector('.message__div').style.zIndex = "-1";
     }, 3000);
     document.querySelector('.message__div').innerHTML = message;
 }
@@ -240,7 +265,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.donut__bake').style.display = "block";
         document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
-        document.querySelector('#volgende__stap').innerHTML = "Bake Donut!";
+        document.querySelector('#volgende__stap').innerHTML = "Bak je Donut!";
         document.querySelector('.options__title').innerHTML = "Bak je donut!";
     }
     if (CompanyName) {
@@ -388,7 +413,7 @@ function postDonut() {
                 snapshot: DonutSnapshot,
                 status: "nieuw",
                 quantity: 1,
-                email: "jan",
+                email: CompanyContact,
             }),
         })
         .then((response) => response.json())

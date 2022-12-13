@@ -39,6 +39,7 @@ h2 {
   font-family: "Dosis", sans-serif;
   font-weight: Bold;
   font-size: 2rem;
+  padding: 1rem 0rem;
 }
 
 h3 {
@@ -66,7 +67,8 @@ a {
   color: $color-black;
 }
 hr{
-  border: 2px solid $color-primary;
+  border: 1px solid $color-primary;
+  margin: 1rem 0 1rem 0;
 }
 
 // ------ Layout ------

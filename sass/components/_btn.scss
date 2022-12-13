@@ -21,9 +21,11 @@
 }
 .configurator__btn{
   width: 48%;
+  float: right;
 }
 .configurator__btn--inactive{
   width: 48%;
   background-color: global.$color-gray;
   cursor: default;
+  float: right;
 }
