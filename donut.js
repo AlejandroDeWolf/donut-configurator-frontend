@@ -82,6 +82,9 @@ function createDonut(donut) {
                 var glaze = donut.glaze;
                 Mesh.children[i].material.color.setHex(glaze);
             }
+            if (Mesh.children[i].name.startsWith("Doughnut")) {
+                Mesh.children[i].material.color.setHex(0xEEC783);
+            }
         }
         animate();
     });

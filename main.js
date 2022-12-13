@@ -386,7 +386,9 @@ function postDonut() {
                 date: DateNow,
                 remarks: DonutRemarks,
                 snapshot: DonutSnapshot,
-                status: 1,
+                status: "nieuw",
+                quantity: 1,
+                email: "jan",
             }),
         })
         .then((response) => response.json())
