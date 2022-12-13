@@ -95,6 +95,7 @@ footer {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    transition: 2s ease-in-out;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -117,6 +118,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: 1s ease-in-out;
 
     ul {
         list-style: none;
@@ -193,7 +195,6 @@ footer {
 .donut__brandtag {
     display: none;
     height: 100%;
-
     input[type="file"] {
         color: transparent;
         text-align: center;
@@ -342,4 +343,8 @@ footer {
 }
 .donut__finished{
     display: none;
+    height: 100%;
+    .Meme{
+        background-image: url("https://media.tenor.com/nPH5DKvrjuwAAAAC/homer-simpson.gif");
+    }
 }

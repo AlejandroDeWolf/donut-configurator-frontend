@@ -244,8 +244,13 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.options__title').innerHTML = "Bak je donut!";
     }
     if (CompanyName) {
-        document.querySelector('.donut__bake').style.display = "none";
+        document.querySelector('#container').style.justifyContent = "center";
+        document.querySelector('#configurator__options').innerHTML = "";
+        document.querySelector('#configurator__options').style.width = "0";
         document.querySelector('.donut__finished').style.display = "block";
+        renderer.setSize(configurator.clientWidth, configurator.clientHeight);
+        camera.aspect = configurator.clientWidth / configurator.clientHeight;
+        camera.updateProjectionMatrix();
         snapshot();
     }
 });
