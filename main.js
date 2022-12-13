@@ -27,12 +27,6 @@ const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
 camera.position.z = 4;
 
 const scene = new THREE.Scene();
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.screenSpacePanning = false;
-controls.minDistance = 4;
-controls.maxDistance = 5;
 
 var Mesh = null;
 var loaded = false;
@@ -130,8 +124,6 @@ const tags = document.querySelectorAll('.tag');
 tags.forEach(button => {
     button.addEventListener('click', () => {
         DonutBrandTagType = button.dataset.tag;
-        message = DonutBrandTagType + " Tag type:" + DonutBrandTag;
-        popup(3);
         hideBrandTag();
         uploadBrandTag(DonutBrandTag);
     });
@@ -178,8 +170,7 @@ function unlockButtonForm() {
         //check if  is valid mail
         if (validEmail(CompanyContact)) {
             unlockButton();
-        }
-        else{
+        } else {
             message = "Vul een geldig e-mailadres in";
             popup(3);
         }
@@ -455,6 +446,13 @@ function donutBaked() {
     setTimeout(function () {
         animationDone = false;
     }, 600);
+    
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.screenSpacePanning = false;
+    controls.minDistance = 4;
+    controls.maxDistance = 5;
 }
 
 
