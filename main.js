@@ -79,7 +79,10 @@ function update() {
     requestAnimationFrame(update);
     Mesh.rotation.y += 0.003;
     renderer.render(scene, camera);
-    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks + " " + DonutSnapshot+" "+DonutBrandTagType);
+    if (animationDone) {
+        Mesh.rotation.y += 0.2;
+    }
+    console.log(DonutDough + " " + DonutGlaze + " " + DonutTopping + " " + DonutBrandTag + " " + CompanyName + " " + DateNow + " " + DonutRemarks + " " + DonutSnapshot + " " + DonutBrandTagType);
 }
 
 var DonutDough = "base";
@@ -94,6 +97,7 @@ var DonutSnapshot;
 var SnapshotDone = false;
 var DonutID;
 var message;
+var animationDone = false;
 
 
 // Set glaze color
@@ -125,7 +129,7 @@ const tags = document.querySelectorAll('.tag');
 tags.forEach(button => {
     button.addEventListener('click', () => {
         DonutBrandTagType = button.dataset.tag;
-        message = DonutBrandTagType+" Tag type:"+DonutBrandTag;
+        message = DonutBrandTagType + " Tag type:" + DonutBrandTag;
         popup(3);
         hideBrandTag();
         uploadBrandTag(DonutBrandTag);
@@ -240,6 +244,8 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.options__title').innerHTML = "Bak je donut!";
     }
     if (CompanyName) {
+        document.querySelector('.donut__bake').style.display = "none";
+        document.querySelector('.donut__finished').style.display = "block";
         snapshot();
     }
 });
@@ -283,18 +289,16 @@ function hideBrandTag() {
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name == "Naam") {
             Mesh.children[i].visible = false;
-        }
-        else if (Mesh.children[i].name == "Naam2") {
+        } else if (Mesh.children[i].name == "Naam2") {
             Mesh.children[i].visible = false;
-        }
-        else if (Mesh.children[i].name == "Naam3") {
+        } else if (Mesh.children[i].name == "Naam3") {
             Mesh.children[i].visible = false;
         }
     }
 }
 
 function uploadBrandTag(image) {
-    console.log(DonutBrandTagType+" is visible"+image);
+    console.log(DonutBrandTagType + " is visible" + image);
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name == DonutBrandTagType) {
             Mesh.children[i].visible = true;
@@ -320,6 +324,7 @@ function unlockBrandTagButton() {
     document.querySelector('.image__preview').style.display = "none";
     document.querySelector('.brandtag__options').style.display = "flex";
 }
+
 function lockBrandTagButton() {
     document.querySelector('.image__preview').style.display = "block";
     document.querySelector('.brandtag__options').style.display = "none";
@@ -414,8 +419,14 @@ window.addEventListener("load", function () {
 
 
 function donutBaked() {
-    console.log("Donut is baked!");
+    animationDone = true;
+    setTimeout(function () {
+        animationDone = false;
+    }, 600);
 }
+
+
+
 
 function snapshot() {
     var img = new Image();
