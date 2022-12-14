@@ -1,139 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="sass/app.scss" />
-    <script type="text/javascript" src="html2canvas-master/dist/html2canvas.js"></script>
+    <script
+      type="text/javascript"
+      src="html2canvas-master/dist/html2canvas.js"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <title>Your Donut</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div>
-        <div id="app">
-            <div class="loading__screen"><img src="images/animation.webp" alt=""></div>
-            <header class="header__configurator">
-                <img src="images/logo.png" alt="logo" class="logo__configurator">
-            </header>
-            <div id="container">
-                <div id="configurator"></div>
-                <div id="configurator__options">
-                    <div>
-                        <ul class="configurator__steps">
-                            <li><b>Glazuur</b></li>
-                            <li><b>></b></li>
-                            <li>Topping</li>
-                            <li>></li>
-                            <li>Brand Tag</li>
-                            <li>></li>
-                            <li>Bakken</li>
-                        </ul>
-                    </div><hr>
-                    <h2 class="options__title">Selecteer een glazuur</h2>
-                    <br>
-                    <div class="donut__glaze">
-                        <a href="#" data-glaze="0xC9DB63" data-name="Pistache Groen" class="glaze"
-                            style="background-color: #C9DB63;"></a>
-                        <a href="#" data-glaze="0x7B3F00" data-name="Choco" class="glaze"
-                            style="background-color: #7B3F00;"></a>
-                        <a href="#" data-glaze="0xF3E5AB" data-name="Twix Caramel" class="glaze"
-                            style="background-color: #F3E5AB;"></a>
-                        <a href="#" data-glaze="0xB69AA6" data-name="Kersen Roos" class="glaze"
-                            style="background-color: #B69AA6"></a>
-                        <a href="#" data-glaze="0xf0f0f0" data-name="Kokos Wit" class="glaze"
-                            style="background-color: #f0f0f0;"></a>
-                        <a href="#" data-glaze="0xF2DA6D" data-name="Rijstpap Geel" class="glaze"
-                            style="background-color: #F2DA6D;"></a>
-                        <a href="#" data-glaze="0xff5cce" data-name="Starwberry Roos" class="glaze"
-                            style="background-color: #ff5cce;"></a>
-                        <a href="#" data-glaze="0xfdf332" data-name="Banana Yellow" class="glaze"
-                            style="background-color: #fdf332;"></a>
-                        <a href="#" data-glaze="0x5a005e" data-name="Bessen Paars" class="glaze"
-                            style="background-color: #5a005e;"></a>
-                        <a href="#" data-glaze="0xE73E16" data-name="ThomasMore Rood" class="glaze"
-                            style="background-color: #E73E16;"></a>
-                        <a href="#" data-glaze="0x0090a5" data-name="ThomasMore Blauw" class="glaze"
-                            style="background-color: #0090a5;"></a>
-                        <a href="#" data-glaze="0xE72870" data-name="Donutello Mix" class="glaze"
-                            style="background-color: #E72870;"></a>
-                        <a href="#" data-glaze="0xE72870" data-name="Donutello Mix" class="glaze"
-                            style="background-color: #E72870;"></a>
-                    </div>
-                    <div class="donut__topping">
-                        <a href="#" data-topping="Sprinkle_0xF3E5AB" data-name="Vanille Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_vanille.webp')"></a>
-                        <a href="#" data-topping="Sprinkle_0x7B3F00" data-name="Choco Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_choco.webp')"></a>
-                        <a href="#" data-topping="Sprinkle_0xF7FD5E" data-name="Gele Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_yellow.webp')"></a>
-                        <a href="#" data-topping="Sprinkle_0xFFAE4F" data-name="Oranje Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_caramel.webp')"></a>
-                        <a href="#" data-topping="Sprinkle_0xFF7EF2" data-name="Paarse Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_purple.webp')"></a>
-                        <a href="#" data-topping="Sprinkle_0xB0FCF6" data-name="Blauwe Sprinkles" class="topping"
-                            style="background-image: url('images/toppings/sprinkle_blue.webp')"></a>
-                        <a href="#" data-topping="Marsh_0xfeddff" data-name="Marshmallows" class="topping"
-                            style="background-image: url('images/toppings/marsh.webp')"></a>
-                        <a href="#" data-topping="Confi_0x603100" data-name="Choco Lijnen" class="topping"
-                            style="background-image: url('images/toppings/lijn_choco.webp')"></a>
-                        <a href="#" data-topping="Confi_0xF3E5AB" data-name="Vanille Lijnen" class="topping"
-                            style="background-image: url('images/toppings/lijn_vanille.webp')"></a>
-                        <a href="#" data-topping="Confi_0xB0FCF6" data-name="Vanille Lijnen" class="topping"
-                            style="background-image: url('images/toppings/lijn_blauw.webp')"></a>
-                        <a href="#" data-topping="Bar_0x7B3F00" data-name="Choco Reep" class="topping"
-                            style="background-image: url('images/toppings/reep.webp')"></a>
-                        <a href="#" data-topping="Nuts_0x2a4d00" data-name="Pistaches Noten" class="topping"
-                            style="background-image: url('images/toppings/noot.webp')"></a>
-                        <a href="#" data-topping="Balls_0x7B3F00" data-name="Choco Balletjes" class="topping"
-                            style="background-image: url('images/toppings/balls.webp')"></a>
-                        <a href="#" data-topping="Sucre_0xFFFFFF" data-name="Suiker" class="topping"
-                            style="background-image: url('images/toppings/suiker.webp')"></a>
-                        <a href="#" data-topping="Sucre_0xFFAE4F" data-name="Bruine Suiker" class="topping"
-                            style="background-image: url('images/toppings/bruine_suiker.webp')"></a>
-                        <a href="#" class="topping__clear"
-                            style="background-image: url('images/toppings/none.webp')"></a>
-                    </div>
-                    <div class="donut__brandtag">
-                        <form action="" method="post" enctype="multipart/form-data"
-                            onsubmit="AJAXSubmit(this); return false;">
-                            <input type="file" name="file" id="brand__foto" />
-                            <input type="submit" value="✓" id="brand__foto__upload" disabled />
-                            <div class="image__preview"></div>
-                        </form>
-                        <div class="brandtag__options">
-                            <a href="#" data-tag="Naam" class="tag"
-                                style="background-image: url('images/toppings/rect.webp')"></a>
-                            <a href="#" data-tag="Naam2" class="tag"
-                                style="background-image: url('images/toppings/ster.webp')"></a>
-                            <a href="#" data-tag="Naam3" class="tag"
-                                style="background-image: url('images/toppings/ovaal.webp')"></a>
-                        </div>
-                    </div>
-                    <div class="donut__bake">
-                        <input type="text" class="company__name" placeholder="name or company">
-                        <input type="email" class="company__contact" placeholder="email">
-                        <textarea class="donut__remarks" placeholder="any remarks?"></textarea>
-                    </div>
-
-                    <br>
-                    <div>
-                        <!-- <button id="vorige__stap" class="btn configurator__btn">Terug</button> -->
-                        <button id="volgende__stap" class="btn configurator__btn--inactive" disabled>Volgende</button>
-                    </div>
-                </div>
-
+      <div id="app">
+        <div class="loading__screen">
+          <img src="images/animation.webp" alt="" />
+        </div>
+        <header class="header__configurator">
+          <img src="images/logo.png" alt="logo" class="logo__configurator" />
+        </header>
+        <div id="container">
+          <div id="configurator"></div>
+          <div id="configurator__options">
+            <div>
+              <ul class="configurator__steps">
+                <li><b>Glazuur</b></li>
+                <li><b>></b></li>
+                <li>Topping</li>
+                <li>></li>
+                <li>Brand Tag</li>
+                <li>></li>
+                <li>Bakken</li>
+              </ul>
             </div>
+            <hr />
+            <h2 class="options__title">Selecteer een glazuur</h2>
+            <br />
+            <div class="donut__glaze">
+              <a
+                href="#"
+                data-glaze="0xC9DB63"
+                data-name="Pistache Groen"
+                class="glaze"
+                style="background-color: #c9db63"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0x7B3F00"
+                data-name="Choco"
+                class="glaze"
+                style="background-color: #7b3f00"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xF3E5AB"
+                data-name="Twix Caramel"
+                class="glaze"
+                style="background-color: #f3e5ab"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xB69AA6"
+                data-name="Kersen Roos"
+                class="glaze"
+                style="background-color: #b69aa6"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xf0f0f0"
+                data-name="Kokos Wit"
+                class="glaze"
+                style="background-color: #f0f0f0"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xF2DA6D"
+                data-name="Rijstpap Geel"
+                class="glaze"
+                style="background-color: #f2da6d"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xff5cce"
+                data-name="Starwberry Roos"
+                class="glaze"
+                style="background-color: #ff5cce"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xfdf332"
+                data-name="Banana Yellow"
+                class="glaze"
+                style="background-color: #fdf332"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0x5a005e"
+                data-name="Bessen Paars"
+                class="glaze"
+                style="background-color: #5a005e"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xE73E16"
+                data-name="ThomasMore Rood"
+                class="glaze"
+                style="background-color: #e73e16"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0x0090a5"
+                data-name="ThomasMore Blauw"
+                class="glaze"
+                style="background-color: #0090a5"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xE72870"
+                data-name="Donutello Mix"
+                class="glaze"
+                style="background-color: #e72870"
+              ></a>
+              <a
+                href="#"
+                data-glaze="0xE72870"
+                data-name="Donutello Mix"
+                class="glaze"
+                style="background-color: #e72870"
+              ></a>
+            </div>
+            <div class="donut__topping">
+              <a
+                href="#"
+                data-topping="Sprinkle_0xF3E5AB"
+                data-name="Vanille Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_vanille.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Sprinkle_0x7B3F00"
+                data-name="Choco Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_choco.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Sprinkle_0xF7FD5E"
+                data-name="Gele Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_yellow.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Sprinkle_0xFFAE4F"
+                data-name="Oranje Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_caramel.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Sprinkle_0xFF7EF2"
+                data-name="Paarse Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_purple.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Sprinkle_0xB0FCF6"
+                data-name="Blauwe Sprinkles"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/sprinkle_blue.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Marsh_0xfeddff"
+                data-name="Marshmallows"
+                class="topping"
+                style="background-image: url('images/toppings/marsh.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Confi_0x603100"
+                data-name="Choco Lijnen"
+                class="topping"
+                style="background-image: url('images/toppings/lijn_choco.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Confi_0xF3E5AB"
+                data-name="Vanille Lijnen"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/lijn_vanille.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                data-topping="Confi_0xB0FCF6"
+                data-name="Vanille Lijnen"
+                class="topping"
+                style="background-image: url('images/toppings/lijn_blauw.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Bar_0x7B3F00"
+                data-name="Choco Reep"
+                class="topping"
+                style="background-image: url('images/toppings/reep.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Nuts_0x2a4d00"
+                data-name="Pistaches Noten"
+                class="topping"
+                style="background-image: url('images/toppings/noot.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Balls_0x7B3F00"
+                data-name="Choco Balletjes"
+                class="topping"
+                style="background-image: url('images/toppings/balls.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Sucre_0xFFFFFF"
+                data-name="Suiker"
+                class="topping"
+                style="background-image: url('images/toppings/suiker.webp')"
+              ></a>
+              <a
+                href="#"
+                data-topping="Sucre_0xFFAE4F"
+                data-name="Bruine Suiker"
+                class="topping"
+                style="
+                  background-image: url('images/toppings/bruine_suiker.webp');
+                "
+              ></a>
+              <a
+                href="#"
+                class="topping__clear"
+                style="background-image: url('images/toppings/none.webp')"
+              ></a>
+            </div>
+            <div class="donut__brandtag">
+              <form
+                action=""
+                method="post"
+                enctype="multipart/form-data"
+                onsubmit="AJAXSubmit(this); return false;"
+              >
+                <input type="file" name="file" id="brand__foto" />
+                <input
+                  type="submit"
+                  value="✓"
+                  id="brand__foto__upload"
+                  disabled
+                />
+                <div class="image__preview"></div>
+              </form>
+              <div class="brandtag__options">
+                <a
+                  href="#"
+                  data-tag="Naam"
+                  class="tag"
+                  style="background-image: url('images/toppings/rect.webp')"
+                ></a>
+                <a
+                  href="#"
+                  data-tag="Naam2"
+                  class="tag"
+                  style="background-image: url('images/toppings/ster.webp')"
+                ></a>
+                <a
+                  href="#"
+                  data-tag="Naam3"
+                  class="tag"
+                  style="background-image: url('images/toppings/ovaal.webp')"
+                ></a>
+              </div>
+            </div>
+            <div class="donut__bake">
+              <input
+                type="text"
+                class="company__name"
+                placeholder="name or company"
+              />
+              <input
+                type="email"
+                class="company__contact"
+                placeholder="email"
+              />
+              <input
+                type="number"
+                class="donut__quantity"
+                placeholder="quantity"
+              />
+              <textarea
+                class="donut__remarks"
+                placeholder="any remarks?"
+              ></textarea>
+            </div>
+
+            <br />
+            <div>
+              <!-- <button id="vorige__stap" class="btn configurator__btn">Terug</button> -->
+              <button
+                id="volgende__stap"
+                class="btn configurator__btn--inactive"
+                disabled
+              >
+                Volgende
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="message__div">ok</div>
-        <div class="donut__finished">
-            <a href="#" class="share__donut"><img src="images/share.svg" alt=""></a>
-            <a href="#" class="screenshot__donut"><img src="images/camera.svg" alt=""></a>
-        </div>
+      </div>
+      <div class="message__div">ok</div>
+      <div class="donut__finished">
+        <a href="#" class="share__donut"
+          ><img src="images/share.svg" alt=""
+        /></a>
+        <a href="#" class="screenshot__donut"
+          ><img src="images/camera.svg" alt=""
+        /></a>
+      </div>
     </div>
     <script type="module" src="main.js"></script>
-</body>
-
+  </body>
 </html>
