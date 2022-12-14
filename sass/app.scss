@@ -357,5 +357,9 @@ footer {
   }
   a {
     text-align: center;
+    img:hover {
+      transform: scale(1.1);
+      transition: 0.5s ease;
+    }
   }
 }

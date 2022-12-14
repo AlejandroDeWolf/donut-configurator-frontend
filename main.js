@@ -226,6 +226,22 @@ function popup(color) {
     }, 3000);
     document.querySelector('.message__div').innerHTML = message;
 }
+function popup2(color) {
+    document.querySelector('.message__div').style.zIndex = "2";
+    if (color == 1) {
+        document.querySelector('.message__div').style.backgroundColor = "#4CAF50";
+    } else if (color == 2) {
+        document.querySelector('.message__div').style.backgroundColor = "#f44336";
+    } else {
+        document.querySelector('.message__div').style.backgroundColor = "#2196F3";
+    }
+    document.querySelector('.message__div').style.opacity = "1";
+    setTimeout(function () {
+        document.querySelector('.message__div').style.opacity = "0";
+        document.querySelector('.message__div').style.zIndex = "-1";
+    }, 50000);
+    document.querySelector('.message__div').innerHTML = message;
+}
 
 function lockButton() {
     var button = document.getElementById("volgende__stap");
@@ -390,7 +406,7 @@ const api_url = "https://adorable-red-sundress.cyclic.app/donuts";
 //create function with prevent default
 function postDonut() {
     message = "Je donut wordt gebakken! Even geduld aub...";
-    popup(3);
+    popup2(3);
     var dataURL = renderer.domElement.toDataURL();
     fetch(api_url, {
             method: "POST",
