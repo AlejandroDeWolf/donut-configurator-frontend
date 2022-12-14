@@ -90,6 +90,7 @@ var DateNow = new Date().toLocaleDateString();
 var DonutRemarks;
 var DonutSnapshot;
 var SnapshotDone = false;
+var DonutQuantity;
 var DonutID;
 var message;
 var animationDone = false;
@@ -164,10 +165,14 @@ document.querySelector(".company__contact").onchange = function () {
     CompanyContact = document.querySelector(".company__contact").value;
     unlockButtonForm();
 };
+document.querySelector(".donut__quantity").onchange = function () {
+    DonutQuantity = document.querySelector(".donut__quantity").value;
+    unlockButtonForm();
+};
+
 
 function unlockButtonForm() {
     if (CompanyName && DonutRemarks && CompanyContact) {
-        //check if  is valid mail
         if (validEmail(CompanyContact)) {
             unlockButton();
         } else {
@@ -403,7 +408,7 @@ function postDonut() {
                 remarks: DonutRemarks,
                 snapshot: DonutSnapshot,
                 status: "nieuw",
-                quantity: 1,
+                quantity: DonutQuantity,
                 email: CompanyContact,
             }),
         })
