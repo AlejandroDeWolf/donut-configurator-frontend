@@ -111,6 +111,7 @@ var DonutQuantity;
 var DonutID;
 var message;
 var animationDone = false;
+var step = 0;
 
 
 // Set glaze color
@@ -176,7 +177,6 @@ document.querySelector(".company__name").onchange = function () {
 };
 document.querySelector(".donut__remarks").onchange = function () {
     DonutRemarks = document.querySelector(".donut__remarks").value;
-    unlockButtonForm();
 };
 document.querySelector(".company__contact").onchange = function () {
     CompanyContact = document.querySelector(".company__contact").value;
@@ -189,7 +189,7 @@ document.querySelector(".donut__quantity").onchange = function () {
 
 
 function unlockButtonForm() {
-    if (CompanyName && DonutRemarks && CompanyContact) {
+    if (CompanyName && CompanyContact && DonutQuantity) {
         if (validEmail(CompanyContact)) {
             unlockButton();
         } else {
@@ -226,7 +226,18 @@ function unlockButton() {
     button.classList.add("configurator__btn");
     button.disabled = false;
 }
-
+function unlockButton2() {
+    var button = document.getElementById("vorige__stap");
+    button.classList.remove("configurator__btn--inactive");
+    button.classList.add("configurator__btn");
+    button.disabled = false;
+}
+function lockButton2() {
+    var button = document.getElementById("vorige__stap");
+    button.classList.remove("configurator__btn");
+    button.classList.add("configurator__btn--inactive");
+    button.disabled = true;
+}
 function popup(color) {
     document.querySelector('.message__div').style.zIndex = "2";
     if (color == 1) {
@@ -270,7 +281,7 @@ function lockButton() {
 
 //on click of button id volgendestap run alert
 document.querySelector('#volgende__stap').addEventListener('click', () => {
-    if (DonutGlaze) {
+    if (step == 0) {
         document.querySelector('.donut__topping').style.display = "grid";
         document.querySelector('.donut__glaze').style.display = "none";
         lockButton();
@@ -279,26 +290,34 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#e72c70";
         document.querySelector('.options__title').innerHTML = "Kies een topping";
+        step = 1;
+        unlockButton2();
+        return;
     }
-    if (DonutTopping) {
+    if (step == 1) {
         document.querySelector('.donut__brandtag').style.display = "block";
         document.querySelector('.donut__topping').style.display = "none";
-        lockButton();
         document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#e72c70";
         document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#e72c70";
         document.querySelector('.options__title').innerHTML = "Upload een brandtag";
+        step = 2;
+        return;
     }
-    if (DonutBrandTag) {
+    if (step == 2) {
         document.querySelector('.donut__brandtag').style.display = "none";
         document.querySelector('.donut__bake').style.display = "block";
         document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
-        document.querySelector('#volgende__stap').innerHTML = "Bak je Donut!";
+        document.querySelector('#volgende__stap').innerHTML = "Bakken";
         document.querySelector('.options__title').innerHTML = "Bak je donut!";
+        document.querySelector('#vorige__stap').style.display = "none";
+        lockButton();
+        step = 3;
+        return;
     }
-    if (CompanyName) {
+    if (step == 3) {
         message = "Je donut wordt gebakken! Even geduld aub...";
         popup2(3);
         document.querySelector('#container').style.justifyContent = "center";
@@ -316,6 +335,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         camera.aspect = configurator.clientWidth / configurator.clientHeight;
         camera.updateProjectionMatrix();
         snapshot();
+
     }
 });
 
@@ -342,16 +362,39 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
     }
 });
 
-// document.querySelector('#vorige__stap').addEventListener('click', () => {
-//     if (document.querySelector('.donut__topping').style.display == "block") {
-//         document.querySelector('.donut__topping').style.display = "none";
-//         document.querySelector('.donut__glaze').style.display = "block";
-//     }
-//     else if(document.querySelector('.donut__brandtag').style.display == "block"){
-//         document.querySelector('.donut__brandtag').style.display = "none";
-//         document.querySelector('.donut__').style.display = "block";
-//     }
-// });
+document.querySelector('#vorige__stap').addEventListener('click', () => {
+    if (step == 1) {
+        document.querySelector('.donut__topping').style.display = "none";
+        document.querySelector('.donut__glaze').style.display = "grid";
+        document.querySelector('.configurator__steps li:nth-child(3)').style.fontWeight = "normal";
+        document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "normal";
+        document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#000";
+        document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#000";
+        document.querySelector('.options__title').innerHTML = "Kies een glazuur";
+        lockButton2();
+        step = 0;
+    }
+    if (step == 2) {
+        document.querySelector('.donut__brandtag').style.display = "none";
+        document.querySelector('.donut__topping').style.display = "grid";
+        lockButton();
+        document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "normal";
+        document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "normal";
+        document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#000";
+        document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#000";
+        document.querySelector('.options__title').innerHTML = "Kies een topping";
+        step = 1;
+    }
+    if (step == 3) {
+        document.querySelector('.donut__bake').style.display = "none";
+        document.querySelector('.donut__brandtag').style.display = "block";
+        document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "normal";
+        document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#000";
+        document.querySelector('#volgende__stap').innerHTML = "Volgende stap";
+        document.querySelector('.options__title').innerHTML = "Upload een brandtag";
+        step = 2;
+    }
+});
 
 
 function hideBrandTag() {
