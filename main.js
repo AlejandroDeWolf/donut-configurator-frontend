@@ -29,14 +29,11 @@ cameraPosition();
 function cameraPosition() {
     if (window.innerWidth < 1368 && window.innerWidth > 1021) {
         camera.position.z = 5;
-    }
-    else if (window.innerWidth <= 1020 && window.innerWidth > 931) {
+    } else if (window.innerWidth <= 1020 && window.innerWidth > 931) {
         camera.position.z = 6;
-    }
-    else if (window.innerWidth < 930) {
-        camera.position.z = 5;
-    }
-    else{
+    } else if (window.innerWidth < 930) {
+        camera.position.z = 3.5;
+    } else {
         camera.position.z = 4;
     }
 }
@@ -226,18 +223,21 @@ function unlockButton() {
     button.classList.add("configurator__btn");
     button.disabled = false;
 }
+
 function unlockButton2() {
     var button = document.getElementById("vorige__stap");
     button.classList.remove("configurator__btn--inactive");
     button.classList.add("configurator__btn");
     button.disabled = false;
 }
+
 function lockButton2() {
     var button = document.getElementById("vorige__stap");
     button.classList.remove("configurator__btn");
     button.classList.add("configurator__btn--inactive");
     button.disabled = true;
 }
+
 function popup(color) {
     document.querySelector('.message__div').style.zIndex = "2";
     if (color == 1) {
@@ -282,9 +282,13 @@ function lockButton() {
 //on click of button id volgendestap run alert
 document.querySelector('#volgende__stap').addEventListener('click', () => {
     if (step == 0) {
+        if (DonutTopping) {
+            unlockButton();
+        } else {
+            lockButton();
+        }
         document.querySelector('.donut__topping').style.display = "grid";
         document.querySelector('.donut__glaze').style.display = "none";
-        lockButton();
         document.querySelector('.configurator__steps li:nth-child(3)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "bold";
         document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#e72c70";
@@ -312,7 +316,6 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#e72c70";
         document.querySelector('#volgende__stap').innerHTML = "Bakken";
         document.querySelector('.options__title').innerHTML = "Bak je donut!";
-        document.querySelector('#vorige__stap').style.display = "none";
         lockButton();
         step = 3;
         return;
@@ -327,8 +330,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
             document.querySelector('#container').style.marginTop = "25vh";
             document.querySelector('#container').style.height = "auto";
             document.querySelector('#configurator__options').style.height = "0";
-        }
-        else {
+        } else {
             document.querySelector('#configurator__options').style.width = "0";
         }
         document.querySelector('.donut__finished').style.display = "flex";
@@ -336,7 +338,6 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         camera.aspect = configurator.clientWidth / configurator.clientHeight;
         camera.updateProjectionMatrix();
         snapshot();
-
     }
 });
 
@@ -365,38 +366,132 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
 
 document.querySelector('#vorige__stap').addEventListener('click', () => {
     if (step == 1) {
-        document.querySelector('.donut__topping').style.display = "none";
-        document.querySelector('.donut__glaze').style.display = "grid";
-        document.querySelector('.configurator__steps li:nth-child(3)').style.fontWeight = "normal";
-        document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "normal";
-        document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#000";
-        document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#000";
-        document.querySelector('.options__title').innerHTML = "Kies een glazuur";
+        step1();
         lockButton2();
+        unlockButton();
         step = 0;
     }
     if (step == 2) {
-        document.querySelector('.donut__brandtag').style.display = "none";
-        document.querySelector('.donut__topping').style.display = "grid";
-        lockButton();
-        document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "normal";
-        document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "normal";
-        document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#000";
-        document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#000";
-        document.querySelector('.options__title').innerHTML = "Kies een topping";
+        if (DonutTopping) {
+            unlockButton();
+        } else {
+            lockButton();
+        }
+        step2();
         step = 1;
     }
     if (step == 3) {
-        document.querySelector('.donut__bake').style.display = "none";
-        document.querySelector('.donut__brandtag').style.display = "block";
-        document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "normal";
-        document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#000";
-        document.querySelector('#volgende__stap').innerHTML = "Volgende stap";
-        document.querySelector('.options__title').innerHTML = "Upload een brandtag";
+        step3();
         step = 2;
+        unlockButton();
     }
 });
 
+function step1() {
+    hideAll();
+    document.querySelector('.donut__glaze').style.display = "grid";
+    document.querySelector('.options__title').innerHTML = "Kies een glazuur";
+    resetBreadCrumbs();
+    document.querySelector('#volgende__stap').innerHTML = "Volgende";
+}
+
+function step2() {
+    hideAll();
+    document.querySelector('.donut__brandtag').style.display = "none";
+    document.querySelector('.donut__topping').style.display = "grid";
+    document.querySelector('.options__title').innerHTML = "Kies een topping";
+    resetBreadCrumbs();
+    setBreadCrumb(3);
+    setBreadCrumb(4);
+    document.querySelector('#volgende__stap').innerHTML = "Volgende";
+}
+function step3() {
+    hideAll();
+    document.querySelector('.donut__brandtag').style.display = "block";
+    document.querySelector('.options__title').innerHTML = "Upload een brandtag";
+    resetBreadCrumbs();
+    setBreadCrumb(3);
+    setBreadCrumb(4);
+    setBreadCrumb(5);
+    setBreadCrumb(6);
+    document.querySelector('#volgende__stap').innerHTML = "Volgende";
+}
+function step4() {
+    hideAll();
+    document.querySelector('.donut__bake').style.display = "block";
+    document.querySelector('.options__title').innerHTML = "Bak je donut!";
+    document.querySelector('#volgende__stap').innerHTML = "Bakken";
+    resetBreadCrumbs();
+    setBreadCrumb(3);
+    setBreadCrumb(4);
+    setBreadCrumb(5);
+    setBreadCrumb(6);
+    setBreadCrumb(7);
+}
+
+function resetBreadCrumbs() {
+    document.querySelector('.configurator__steps li:nth-child(3)').style.fontWeight = "normal";
+    document.querySelector('.configurator__steps li:nth-child(4)').style.fontWeight = "normal";
+    document.querySelector('.configurator__steps li:nth-child(5)').style.fontWeight = "normal";
+    document.querySelector('.configurator__steps li:nth-child(6)').style.fontWeight = "normal";
+    document.querySelector('.configurator__steps li:nth-child(7)').style.fontWeight = "normal";
+    document.querySelector('.configurator__steps li:nth-child(3)').style.color = "#000";
+    document.querySelector('.configurator__steps li:nth-child(4)').style.color = "#000";
+    document.querySelector('.configurator__steps li:nth-child(5)').style.color = "#000";
+    document.querySelector('.configurator__steps li:nth-child(6)').style.color = "#000";
+    document.querySelector('.configurator__steps li:nth-child(7)').style.color = "#000";
+}
+
+function setBreadCrumb(number) {
+    document.querySelector('.configurator__steps li:nth-child(' + number + ')').style.fontWeight = "bold";
+    document.querySelector('.configurator__steps li:nth-child(' + number + ')').style.color = "#e72c70";
+}
+
+
+//event listeners for ul li 2nd child
+document.querySelector('.configurator__steps li:nth-child(1)').addEventListener('click', () => {
+    step1();
+    step = 0;
+    if (DonutGlaze) {
+        unlockButton();
+    }
+    lockButton2();
+});
+document.querySelector('.configurator__steps li:nth-child(3)').addEventListener('click', () => {
+    if (DonutGlaze) {
+        unlockButton2();
+        step2();
+        step = 1;
+        if (DonutTopping) {
+            unlockButton();
+        }
+        else {
+            lockButton();
+        }
+    }
+});
+document.querySelector('.configurator__steps li:nth-child(5)').addEventListener('click', () => {
+    if (DonutTopping && DonutGlaze) {
+        step3();
+        step = 2;
+        unlockButton2();
+    }
+});
+document.querySelector('.configurator__steps li:nth-child(7)').addEventListener('click', () => {
+    if (DonutTopping && DonutGlaze) {
+        step4();
+        step = 3;
+        unlockButton2();
+    }
+});
+
+
+function hideAll() {
+    document.querySelector('.donut__glaze').style.display = "none";
+    document.querySelector('.donut__topping').style.display = "none";
+    document.querySelector('.donut__brandtag').style.display = "none";
+    document.querySelector('.donut__bake').style.display = "none";
+}
 
 function hideBrandTag() {
     for (var i = 0; i < Mesh.children.length; i++) {
