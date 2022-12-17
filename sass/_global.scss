@@ -40,6 +40,11 @@ h2 {
   font-weight: Bold;
   font-size: 2rem;
   padding: 1rem 0rem;
+  //media queries
+  @media (max-width: 930px) {
+    font-size: 1.3rem;
+    padding: 0rem 0rem;
+  }
 }
 
 h3 {

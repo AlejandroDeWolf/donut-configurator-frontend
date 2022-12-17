@@ -24,7 +24,23 @@ const ASPECT = configurator.clientWidth / configurator.clientHeight;
 const NEAR = 0.1;
 const FAR = 1000;
 const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-camera.position.z = 4;
+cameraPosition();
+
+function cameraPosition() {
+    if (window.innerWidth < 1368 && window.innerWidth > 1020) {
+        camera.position.z = 5;
+    }
+    else if (window.innerWidth <= 1020 && window.innerWidth > 768) {
+        camera.position.z = 6;
+    }
+    else if (window.innerWidth < 768) {
+        camera.position.z = 5;
+    }
+    else{
+        camera.position.z = 4;
+    }
+}
+
 
 const scene = new THREE.Scene();
 
@@ -57,6 +73,7 @@ window.addEventListener('resize', function () {
     renderer.setSize(configurator.clientWidth, configurator.clientHeight);
     camera.aspect = configurator.clientWidth / configurator.clientHeight;
     camera.updateProjectionMatrix();
+    cameraPosition();
 });
 
 const pointLight = new THREE.PointLight(0xFFFFFF, 0.5);
@@ -286,7 +303,14 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         popup2(3);
         document.querySelector('#container').style.justifyContent = "center";
         document.querySelector('#configurator__options').innerHTML = "";
-        document.querySelector('#configurator__options').style.width = "0";
+        //if window width is smaller than 600px
+        if (window.innerWidth < 930) {
+            document.querySelector('#container').style.marginTop = "25vh";
+            document.querySelector('#configurator__options').style.height = "0";
+        }
+        else {
+            document.querySelector('#configurator__options').style.width = "0";
+        }
         document.querySelector('.donut__finished').style.display = "flex";
         renderer.setSize(configurator.clientWidth, configurator.clientHeight);
         camera.aspect = configurator.clientWidth / configurator.clientHeight;
@@ -452,14 +476,12 @@ function postDonut() {
 //window on load
 window.addEventListener("load", function () {
     setInterval(function () {
-        document.querySelector('body').style.overflow = "auto";
         document.querySelector('.loading__screen').classList.add("loading__screen__animation");
         setTimeout(function () {
             document.querySelector('.loading__screen').style.display = "none";
         }, 450);
     }, 2000);
     loaded = true;
-    document.querySelector('body').style.overflow = "auto";
 });
 
 
