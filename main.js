@@ -27,13 +27,13 @@ const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
 cameraPosition();
 
 function cameraPosition() {
-    if (window.innerWidth < 1368 && window.innerWidth > 1020) {
+    if (window.innerWidth < 1368 && window.innerWidth > 1021) {
         camera.position.z = 5;
     }
-    else if (window.innerWidth <= 1020 && window.innerWidth > 768) {
+    else if (window.innerWidth <= 1020 && window.innerWidth > 931) {
         camera.position.z = 6;
     }
-    else if (window.innerWidth < 768) {
+    else if (window.innerWidth < 930) {
         camera.position.z = 5;
     }
     else{
@@ -325,6 +325,7 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         //if window width is smaller than 600px
         if (window.innerWidth < 930) {
             document.querySelector('#container').style.marginTop = "25vh";
+            document.querySelector('#container').style.height = "auto";
             document.querySelector('#configurator__options').style.height = "0";
         }
         else {

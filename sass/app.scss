@@ -121,10 +121,10 @@ footer {
   }
 }
 
-#volgende__stap{
-  @media (max-width: 930px) {
-    width: 100%;
-  }
+.buttons__div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 #configurator__options {
