@@ -587,7 +587,7 @@ function postDonut() {
                 date: DateNow,
                 remarks: DonutRemarks,
                 snapshot: DonutSnapshot,
-                status: "nieuw",
+                status: "Nieuw",
                 quantity: DonutQuantity,
                 email: CompanyContact,
             }),

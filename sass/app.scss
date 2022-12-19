@@ -144,6 +144,7 @@ footer {
     li {
       font-size: 1.6em;
       line-height: 0.6;
+      transition: 0.5s ease-in-out;
     }
   }
   @media (max-width: 930px) {
