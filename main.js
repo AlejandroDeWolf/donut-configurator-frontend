@@ -248,11 +248,11 @@ function popup(color) {
         document.querySelector('.message__div').style.backgroundColor = "#2196F3";
     }
     document.querySelector('.message__div').style.opacity = "1";
+    document.querySelector('.message__div').innerHTML = message;
     setTimeout(function () {
         document.querySelector('.message__div').style.opacity = "0";
         document.querySelector('.message__div').style.zIndex = "-1";
     }, 3000);
-    document.querySelector('.message__div').innerHTML = message;
 }
 
 function popup2(color) {
@@ -619,8 +619,10 @@ window.addEventListener("load", function () {
         setTimeout(function () {
             document.querySelector('.loading__screen').style.display = "none";
         }, 450);
+        document.querySelector('body').style.overflow = "auto";
     }, 2000);
     loaded = true;
+    
 });
 
 
