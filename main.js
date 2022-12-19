@@ -356,7 +356,7 @@ document.querySelector('#brand__foto').addEventListener('change', () => {
         reader.onloadend = function () {
             document.querySelector('.image__preview').style.backgroundImage = "url(" + reader.result + ")";
         }
-        document.querySelector('.image__preview').style.border = "5px dashed #82d1e4";
+        document.querySelector('.image__preview').style.border = "3.5px dashed #82d1e4";
         document.querySelector('.image__preview').innerHTML = "";
         reader.readAsDataURL(file);
         message = "Foto is geupload!";
