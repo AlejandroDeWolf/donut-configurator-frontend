@@ -101,7 +101,7 @@ var DonutBrandTagType = "Naam";
 var CompanyName;
 var CompanyContact;
 var now = new Date();
-var DateNow = now.getDate() + '-' + (now.getMonth()+1) + '-' + now.getFullYear().toString().substr(-2);
+var DateNow = now.getDate() + '/' + (now.getMonth()+1) + '/' + now.getFullYear().toString().substr(-2);
 var DonutRemarks;
 var DonutSnapshot;
 var SnapshotDone = false;
