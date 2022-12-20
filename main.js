@@ -279,7 +279,6 @@ function lockButton() {
     button.disabled = true;
 }
 
-//on click of button id volgendestap run alert
 document.querySelector('#volgende__stap').addEventListener('click', () => {
     if (step == 0) {
         if (DonutTopping) {
@@ -333,7 +332,6 @@ document.querySelector('#volgende__stap').addEventListener('click', () => {
         } else {
             document.querySelector('#configurator__options').style.width = "0";
         }
-        document.querySelector('.donut__finished').style.display = "flex";
         renderer.setSize(configurator.clientWidth, configurator.clientHeight);
         camera.aspect = configurator.clientWidth / configurator.clientHeight;
         camera.updateProjectionMatrix();
@@ -597,15 +595,21 @@ function postDonut() {
             console.log(data);
             DonutID = data._id;
             console.log(DonutID);
+            if (DonutID) {
             donutBaked();
             message = "Donut is gebakken!";
             popup(1);
+            document.querySelector('.donut__finished').style.display = "flex";
             const jsConfetti = new JSConfetti()
             jsConfetti.addConfetti({
                 confettiColors: [
                     '#E72C70', '#E72C70', '#82D1E4', '#F7F249',
                 ],
-            })
+            })} 
+            else {
+                message = "Er is iets misgegaan!";
+                popup(2);
+            }
         });
 }
 
@@ -663,7 +667,7 @@ function ajaxSuccessScreen() {
     postDonut();
 }
 
-//event listener for the button share__donut
+
 document.querySelector('.share__donut').addEventListener('click', () => {
     var link = "https://donuttello.netlify.app/donut.html?id=" + DonutID;
     navigator.clipboard.writeText(link);
@@ -671,7 +675,6 @@ document.querySelector('.share__donut').addEventListener('click', () => {
     popup(3);
 });
 
-//event listener for the button screenshot__donut
 document.querySelector('.screenshot__donut').addEventListener('click', () => {
     var img = new Image();
     renderer.render(scene, camera);

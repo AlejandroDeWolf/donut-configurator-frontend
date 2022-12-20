@@ -45,7 +45,19 @@ const ASPECT = showcase.clientWidth / showcase.clientHeight;
 const NEAR = 0.1;
 const FAR = 1000;
 const camera = new THREE.PerspectiveCamera(FOV, ASPECT, NEAR, FAR);
-camera.position.z = 4;
+cameraPosition();
+
+function cameraPosition() {
+    if (window.innerWidth < 1368 && window.innerWidth > 1021) {
+        camera.position.z = 5;
+    } else if (window.innerWidth <= 1020 && window.innerWidth > 931) {
+        camera.position.z = 6;
+    } else if (window.innerWidth < 930) {
+        camera.position.z = 3.5;
+    } else {
+        camera.position.z = 4;
+    }
+}
 
 const scene = new THREE.Scene();
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -69,12 +81,10 @@ function createDonut(donut) {
         var topping = fullTopping.substring(0, fullTopping.indexOf("_"));
         var toppingHex = fullTopping.substring(fullTopping.indexOf("_") + 1);
         for (var i = 0; i < Mesh.children.length; i++) {
-            if (Mesh.children[i].name != "Glaze" && Mesh.children[i].name != "Doughnut" && Mesh.children[i].name != topping && Mesh.children[i].name != "Naam") {
+            if (Mesh.children[i].name != "Glaze" && Mesh.children[i].name != "Doughnut" && Mesh.children[i].name != topping && Mesh.children[i].name != donut.brandtagtype) {
                 Mesh.children[i].visible = false;
-            } else if (Mesh.children[i].name == "Naam") {
-                hideBrandTag();
-                uploadBrandTag(donut.brandtag);
-            }
+                uploadBrandTag(donut.brandtag, donut.brandtagtype);
+            } 
             else if (Mesh.children[i].name == topping) {
                 Mesh.children[i].material.color.setHex(toppingHex);
             }
@@ -86,11 +96,33 @@ function createDonut(donut) {
                 Mesh.children[i].material.color.setHex(0xEEC783);
             }
         }
-        animate();
+       
     });
 }
 
+
+function uploadBrandTag(image, type) {
+    for (var i = 0; i < Mesh.children.length; i++) {
+        if (Mesh.children[i].name == type) {
+            var texture = new THREE.TextureLoader().load(image);
+            Mesh.children[i].material.map = texture;
+            Mesh.children[i].material.map.wrapS = THREE.RepeatWrapping;
+            Mesh.children[i].material.map.wrapT = THREE.RepeatWrapping;
+            Mesh.children[i].material.transparent = true;
+            Mesh.children[i].material.map.offset.set(0, 0);
+            Mesh.children[i].material.map.center.set(0, 0);
+            Mesh.children[i].material.map.repeat.set(1, 1);
+            Mesh.children[i].material.map.rotation = 0;
+            Mesh.children[i].material.map.flipY = false;
+            Mesh.children[i].material.map.needsUpdate = true;
+            Mesh.children[i].rotation.y = Math.PI / 1.3;
+        }
+    }
+}
+
 console.log(DonutGlaze + " " + DonutTopping + " " + DonutBrandtag + " " + DonutDate);
+
+requestAnimationFrame(animate);
 
 function animate() {
     requestAnimationFrame(animate);
@@ -113,36 +145,12 @@ const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.6);
 scene.add(ambientLight);
 
 
-function uploadBrandTag(image) {
-    for (var i = 0; i < Mesh.children.length; i++) {
-        if (Mesh.children[i].name == "Naam") {
-            Mesh.children[i].visible = true;
-            var texture = new THREE.TextureLoader().load(image);
-            Mesh.children[i].material.map = texture;
-            Mesh.children[i].material.map.wrapS = THREE.RepeatWrapping;
-            Mesh.children[i].material.map.wrapT = THREE.RepeatWrapping;
-            Mesh.children[i].material.map.offset.set(0, 0);
-            Mesh.children[i].material.map.center.set(0, 0);
-            Mesh.children[i].material.map.repeat.set(1, 1);
-            Mesh.children[i].material.map.rotation = 0;
-            Mesh.children[i].material.map.flipY = false;
-            Mesh.children[i].material.map.needsUpdate = true;
-            Mesh.children[i].rotation.y = Math.PI / 1.3;
-        }
-    }
-}
-
 function hideBrandTag() {
     for (var i = 0; i < Mesh.children.length; i++) {
         if (Mesh.children[i].name == "Naam") {
             Mesh.children[i].visible = false;
         }
-        else if (Mesh.children[i].name == "Naam2") {
-            Mesh.children[i].visible = false;
-        }
-        else if (Mesh.children[i].name == "Naam3") {
-            Mesh.children[i].visible = false;
-        }
+
     }
 }
 
