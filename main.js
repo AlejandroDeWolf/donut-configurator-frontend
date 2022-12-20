@@ -100,7 +100,8 @@ var DonutBrandTag;
 var DonutBrandTagType = "Naam";
 var CompanyName;
 var CompanyContact;
-var DateNow = new Date().toLocaleDateString();
+var now = new Date();
+var DateNow = now.getDate() + '-' + (now.getMonth()+1) + '-' + now.getFullYear().toString().substr(-2);
 var DonutRemarks;
 var DonutSnapshot;
 var SnapshotDone = false;
@@ -111,7 +112,6 @@ var animationDone = false;
 var step = 0;
 
 
-// Set glaze color
 const glazes = document.querySelectorAll('.glaze');
 glazes.forEach(button => {
     button.addEventListener('click', () => {
