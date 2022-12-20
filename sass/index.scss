@@ -1,6 +1,6 @@
 @use "./global";
 
-.body__index{
+.body__index {
     overflow: auto;
 }
 
@@ -20,6 +20,10 @@
         .logo {
             width: 160px;
             margin: 2rem auto;
+
+            @media (max-width: 980px) {
+                width: 120px;
+            }
 
             img {
                 width: 100%;
@@ -44,7 +48,7 @@
             width: 50%;
 
             @media (max-width: 980px) {
-                width: 80%;
+                width: 85%;
             }
 
             @media (min-width: 2000px) {
@@ -53,42 +57,66 @@
 
             h1 {
                 margin-bottom: 3rem;
+
+                @media (max-width: 580px) {
+                    font-size: 1.8rem;
+                }
             }
         }
     }
 }
 
 .steps {
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
+
+    @media screen and (max-width: 980px) {
+        width: 90%;
+    }
 
     .steps__title {
         text-align: center;
         margin: 5rem 0 10rem 0;
+
+        @media screen and (max-width: 980px) {
+            margin: 4rem 0;
+        }
+
         h2 {
             color: #e72c70;
             font-size: 3rem;
+
+            @media screen and (max-width: 580px) {
+                font-size: 2rem;
+            }
         }
     }
 
     .steps__step {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         width: 100%;
         margin: 0 auto;
         gap: 15%;
         margin-bottom: 10rem;
+
         &:nth-child(odd) {
             flex-direction: row-reverse;
         }
 
         .steps__step__text {
-            width: 55%;
+            width: 50%;
 
             h3 {
                 margin-bottom: 1rem;
                 color: #e72c70;
+                font-weight: 500;
                 font-size: 2.5rem;
+
+                @media screen and (max-width: 580px) {
+                    font-size: 1.8rem;
+                }
             }
         }
 
@@ -100,36 +128,39 @@
                 width: 100%;
             }
         }
+
         @media screen and (max-width: 580px) {
             flex-direction: column;
             gap: 0;
             width: 90%;
+
             &:nth-child(odd) {
                 flex-direction: column;
             }
+
             .steps__step__text {
                 width: 100%;
             }
+
             .steps__step__image {
                 width: 100%;
-            }            
+            }
         }
 
     }
 }
 
-.clients{
+.clients {
     background-color: #e72c70;
-    padding-bottom: 8rem;
-    padding-top: 2rem;
+    padding: 4rem 0 8rem;
     text-align: center;
 
     .clients__title {
         color: #fff;
         margin-bottom: 4rem;
     }
+
     .clients__logos {
-        //display 2 rows of 4 logos
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(2, 1fr);
@@ -140,24 +171,74 @@
         align-items: center;
         margin: 0 auto;
 
+        @media screen and (max-width: 980px) {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            grid-column-gap: 2rem;
+            grid-row-gap: 6rem;
+            width: 100%;
+        }
+
         img {
             width: 40%;
             margin: 0 auto;
+
+            @media screen and (max-width: 980px) {
+                width: 60%;
+            }
         }
     }
 }
 
-.testimonial{
-    width: 70%;
+.testimonial {
+    width: 100%;
     margin: 0 auto;
     padding-bottom: 8rem;
     padding-top: 4rem;
 
-    img {
-        width: 100%;
-    }
     h2 {
         text-align: center;
         margin-bottom: 2rem;
+    }
+
+    .testimonial__image {
+        width: 50%;
+        margin: 0 auto;
+
+        @media screen and (max-width: 980px) {
+            width: 80%;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.footer {
+    background-color: #e72c70;
+    padding: 2rem 0;
+    text-align: center;
+
+    .footer__text {
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .footer__socials {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+
+        a {
+            color: #fff;
+            font-size: 2rem;
+            width: 48px;
+
+            img {
+                width: 100%;
+            }
+        }
     }
 }
