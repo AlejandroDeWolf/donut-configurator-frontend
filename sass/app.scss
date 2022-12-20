@@ -1,4 +1,5 @@
 @use "./global";
+@use "./index";
 @use "./components/btn";
 
 // index.html
@@ -9,9 +10,9 @@
   height: 100vh;
 }
 
-body {
-  overflow: hidden;
-}
+// body {
+//   overflow: hidden;
+// }
 
 ::-webkit-scrollbar {
   background: rgb(248, 248, 248);
@@ -23,78 +24,6 @@ body {
   background: #dddddd;
   border-radius: 10px;
   width: 5px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .logo {
-    width: 160px;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .nav-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-
-    a {
-      margin-left: 4rem;
-
-      // second child
-      &:nth-child(2) {
-        color: global.$color-gray;
-      }
-    }
-  }
-}
-
-.hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .hero__text {
-    width: 45%;
-
-    p {
-      margin-bottom: 3rem;
-    }
-  }
-
-  .hero__image {
-    width: 45%;
-    margin: 0 4rem;
-    display: flex;
-    justify-content: center;
-    img {
-      width: 60%;
-    }
-  }
-
-  @media (min-width: 1400px) {
-    margin: 2rem 8rem;
-  }
-}
-
-footer {
-  padding: 2rem 0;
-  background-color: global.$color-primary;
-
-  .footer__text {
-    display: flex;
-
-    .footer__title {
-      color: global.$color-white;
-      margin-right: 1rem;
-    }
-  }
 }
 
 #container {
@@ -119,16 +48,18 @@ footer {
 #configurator {
   width: 50%;
   height: 70vh;
+
   @media (max-width: 1300px) {
     width: 40%;
   }
+
   @media (max-width: 930px) {
     width: 100%;
     height: 24vh;
   }
 }
 
-.buttons__div{
+.buttons__div {
   display: flex;
   justify-content: space-between;
 }
@@ -154,6 +85,7 @@ footer {
       cursor: pointer;
     }
   }
+
   @media (max-width: 930px) {
     width: 100%;
     height: 59vh;
@@ -177,6 +109,7 @@ footer {
     padding-bottom: 100%;
     border-radius: 5%;
   }
+
   @media screen and (max-width: 930px) {
     grid-gap: 2rem;
   }
@@ -199,6 +132,7 @@ footer {
     background-position: center;
     background-size: cover;
   }
+
   @media screen and (max-width: 930px) {
     grid-gap: 2rem;
   }
@@ -207,6 +141,7 @@ footer {
 
 .logo__configurator {
   height: 8vh;
+
   @media (max-width: 930px) {
     height: 0vh;
   }
@@ -218,6 +153,7 @@ footer {
   justify-content: space-around;
   margin-top: 1vh;
   margin-bottom: 9vh;
+
   @media (max-width: 930px) {
     margin-top: 0.5vh;
     margin-bottom: 2vh;
@@ -235,6 +171,7 @@ footer {
 .donut__brandtag {
   display: none;
   height: 100%;
+
   input[type="file"] {
     color: transparent;
     text-align: center;
@@ -251,9 +188,10 @@ footer {
     background-color: #e72c70;
     font-size: 1.5rem;
     font-family: "Dosis", sans-serif;
+
     @media screen and (max-width: 930px) {
       font-size: 1.1rem;
-      padding: 1rem 0rem;     
+      padding: 1rem 0rem;
     }
   }
 
@@ -266,9 +204,10 @@ footer {
     font-size: 1.5rem;
     color: #ffffff;
     font-weight: bold;
+
     @media screen and (max-width: 930px) {
       font-size: 1rem;
-      padding: 1rem 0rem;     
+      padding: 1rem 0rem;
     }
   }
 
@@ -317,6 +256,7 @@ footer {
     background-position: center;
     background-size: cover;
   }
+
   @media screen and (max-width: 930px) {
     height: 20vh;
   }
@@ -337,6 +277,7 @@ footer {
     border: 1px solid #7b7b7b;
     padding: 1rem;
     margin-bottom: 1rem;
+
     @media screen and (max-width: 930px) {
       font-size: 1rem;
     }
@@ -352,6 +293,7 @@ footer {
   textarea {
     margin-top: 2%;
     height: 50%;
+
     @media screen and (max-width: 930px) {
       height: 30%;
     }
@@ -362,10 +304,11 @@ footer {
     color: #b1b1b1;
     font-weight: 100;
   }
+
   @media screen and (max-width: 930px) {
     height: 30vh;
   }
- 
+
 }
 
 .loading__screen {
@@ -375,9 +318,11 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
     width: 8%;
   }
+
   @media screen and (max-width: 930px) {
     img {
       width: 20%;
@@ -401,6 +346,7 @@ footer {
   opacity: 0;
   transition: 1s ease;
   z-index: -1;
+
   @media (max-width: 930px) {
     left: 0%;
     width: 100vw;
@@ -419,24 +365,30 @@ footer {
     opacity: 0;
   }
 }
+
 .donut__finished {
   display: none;
   width: 15%;
   margin: 0px auto;
   height: 100%;
   justify-content: space-around;
+
   img {
     width: 30%;
   }
+
   a {
     text-align: center;
+
     img:hover {
       transform: scale(1.1);
       transition: 0.5s ease;
     }
   }
+
   @media screen and (max-width: 930px) {
     width: 30%;
+
     img {
       width: 50%;
     }
