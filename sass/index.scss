@@ -117,3 +117,47 @@
 
     }
 }
+
+.clients{
+    background-color: #e72c70;
+    padding-bottom: 8rem;
+    padding-top: 2rem;
+    text-align: center;
+
+    .clients__title {
+        color: #fff;
+        margin-bottom: 4rem;
+    }
+    .clients__logos {
+        //display 2 rows of 4 logos
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 2rem;
+        grid-row-gap: 6rem;
+        margin: 0 auto;
+        width: 80%;
+        align-items: center;
+        margin: 0 auto;
+
+        img {
+            width: 40%;
+            margin: 0 auto;
+        }
+    }
+}
+
+.testimonial{
+    width: 70%;
+    margin: 0 auto;
+    padding-bottom: 8rem;
+    padding-top: 4rem;
+
+    img {
+        width: 100%;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+}
