@@ -1,0 +1,68 @@
+@use "./global";
+
+header {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../images/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            width: 160px;
+            margin: 2rem auto;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 60%;
+
+        @media (min-width: 2000px) {
+            height: 70%;
+        }
+
+        .hero__text {
+            color: global.$color-white;
+            width: 50%;
+
+            @media (max-width: 980px) {
+                width: 80%;
+            }
+
+            @media (min-width: 2000px) {
+                width: 40%;
+            }
+
+            h1 {
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}
+
+.steps {
+    max-width: 1400px;
+    margin: 0 auto;
+
+    .steps__title {}
+
+    .steps__step {
+
+
+        .steps__step__text {}
+    }
+}

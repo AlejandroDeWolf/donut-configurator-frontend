@@ -9,7 +9,13 @@
   font-family: "Dosis", sans-serif;
   font-weight: 500;
   font-size: 1.4rem;
+  transition: all 0.1s ease-in-out;
   cursor: pointer;
+
+  &:hover {
+    background-color: global.$color-secondary;
+    color: global.$color-black;
+  }
 }
 
 .btn--active {
@@ -19,11 +25,13 @@
 .btn--inactive {
   background-color: global.$color-gray;
 }
-.configurator__btn{
+
+.configurator__btn {
   width: 48%;
   float: right;
 }
-.configurator__btn--inactive{
+
+.configurator__btn--inactive {
   width: 48%;
   background-color: global.$color-gray;
   cursor: default;

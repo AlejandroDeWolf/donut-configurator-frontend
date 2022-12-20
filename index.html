@@ -1,54 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="./images/donut-svgrepo-com.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="sass/app.scss" />
-    <title>Donuttello Configurator</title>
-  </head>
 
-  <body>
-    <div class="section__container">
-      <nav class="section__margin">
-        <div class="logo">
-          <img src="images/logo.png" alt="logo" />
-        </div>
-        <div class="nav-links">
-          <a href="#">Configurator</a>
-          <a href="#">About Donutello</a>
-          <a href="#" class="btn">Contact</a>
-        </div>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="./images/donut-svgrepo-com.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="sass/app.scss" />
+  <title>Donuttello Configurator</title>
+</head>
 
-      <div class="hero section__margin">
-        <div class="hero__text">
-          <h1>Donutello Donut Configurator</h1>
-          <p>
-            Donutello is a donut configurator that allows you to create your own
-            donut. You can choose from a variety of toppings and glazes.
-            Donutello is a donut configurator that allows you to create your own
-            donut. You can choose from a variety of toppings and glazes.
-            Donutello is a donut configurator that allows you to create your own
-            donut. You can choose from a variety of toppings and glazes.
-          </p>
-          <a href="configurator.html" class="btn">Start Configuring</a>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="./images/logo-white.png" alt="logo" />
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="hero__text">
+        <h1>Verse Vlaamse donuts in de stijl
+          van jouw bedrijf als onvergetelijke attentie of heerlijk dessert</h1>
+        <a href="configurator.html" class="btn">Creëer mijn donut</a>
+      </div>
+  </header>
+
+  <main>
+    <!-- 3 steps with a div for text and div for image next to it -->
+    <section class="steps">
+      <div class="steps__title">
+        <h2>3 stappen naar jouw unieke donut</h2>
+      </div>
+
+      <div class="steps__step">
+        <div class="steps__step__text">
+          <h3>1. Kies je donut</h3>
+          <p>Van klassiek tot creatief, van donut tot donutje, van donutje tot donutje met een vulling. Kies de donut
+            die bij jouw bedrijf past.</p>
         </div>
-        <div class="hero__image">
-          <img src="images/donut.gif" alt="donut" />
+        <div class="steps__step__image">
+          <img src="./images/stap1.png" alt="donut" />
         </div>
       </div>
 
-      <footer class="section__padding">
-        <div class="footer__text">
-          <div class="footer__title">
-            <h3>Find us on</h3>
-          </div>
-          <div class="footer__links">
-            <a href=""><img src="images/facebook.png" alt="" /></a>
-          </div>
+      <div class="steps__step">
+        <div class="steps__step__text">
+          <h3>2. Kies je vulling</h3>
+          <p>Van klassiek tot creatief, van donut tot donutje, van donutje tot donutje met een vulling. Kies de donut
+            die bij jouw bedrijf past.</p>
         </div>
-      </footer>
-    </div>
-  </body>
+        <div class="steps__step__image">
+          <img src="./images/stap2.png" alt="donut" />
+        </div>
+      </div>
+
+      <div class="steps__step">
+        <div class="steps__step__text">
+          <h3>3. Kies je verpakking</h3>
+          <p>Van klassiek tot creatief, van donut tot donutje, van donutje tot donutje met een vulling. Kies de donut
+            die bij jouw bedrijf past.</p>
+        </div>
+        <div class="steps__step__image">
+          <img src="./images/stap3.png" alt="donut" />
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>
