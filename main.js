@@ -642,9 +642,9 @@ function donutBaked() {
 
 
 
-
 function snapshot() {
     var img = new Image();
+    renderer.setClearColor(0xffffff, 0);
     renderer.render(scene, camera);
     img.src = renderer.domElement.toDataURL();
     let xhr = new XMLHttpRequest();
@@ -655,6 +655,7 @@ function snapshot() {
     dataPreset.append("upload_preset", "donuts");
     xhr.send(dataPreset);
 };
+
 
 function ajaxSuccessScreen() {
     let response = JSON.parse(this.responseText);

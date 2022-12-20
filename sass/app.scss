@@ -402,10 +402,11 @@ footer {
   transition: 1s ease;
   z-index: -1;
   @media (max-width: 930px) {
-    left: 30%;
-    width: 40vw;
-    bottom: 84vh;
+    left: 0%;
+    width: 100vw;
+    top: 0;
     padding: 0.6rem;
+    bottom: auto;
   }
 }
 
