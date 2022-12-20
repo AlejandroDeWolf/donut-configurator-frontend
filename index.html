@@ -6,6 +6,8 @@
   <link rel="icon" href="./images/donut-svgrepo-com.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="sass/app.scss" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <title>Donuttello Configurator</title>
 </head>
 
@@ -32,7 +34,7 @@
         <h2>3 stappen naar jouw unieke donut</h2>
       </div>
 
-      <div class="steps__step">
+      <div class="steps__step" data-aos="fade-up" data-aos-duration="1500">
         <div class="steps__step__text">
           <h3>Stap 1: Glazuur</h3>
           <p>
@@ -44,19 +46,19 @@
         </div>
       </div>
 
-      <div class="steps__step">
-        <div class="steps__step__image">
-          <img src="./images/stap2.png" alt="donut" />
-        </div>
+      <div class="steps__step" data-aos="fade-up" data-aos-duration="1500">
         <div class="steps__step__text">
           <h3>Stap 2: Topping</h3>
           <p>
             Kies je topping van de donut. Van klassiek tot creatief, van donut tot donutje, van donutje tot donutje personaliseer je donut op basis van de huisstijl van jouw bedrijf. De glazuurkleur zal ook gebaseerd zijn op een bepaalde smaak.
           </p>
         </div>
+        <div class="steps__step__image">
+          <img src="./images/stap2.png" alt="donut" />
+        </div>
       </div>
 
-      <div class="steps__step">
+      <div class="steps__step" data-aos="fade-up" data-aos-duration="1500">
         <div class="steps__step__text">
           <h3>Stap 3: Brand Tag</h3>
           <p>Van klassiek tot creatief, van donut tot donutje, van donutje tot donutje met een vulling. Kies de donut
@@ -67,7 +69,12 @@
         </div>
       </div>
     </section>
+    <section class="clients">
+      
+
+    </section>
   </main>
+  <script type="module" src="index.js"></script>
 </body>
 
 </html>

@@ -62,7 +62,14 @@
     max-width: 1400px;
     margin: 0 auto;
 
-    .steps__title {}
+    .steps__title {
+        text-align: center;
+        margin: 5rem 0 10rem 0;
+        h2 {
+            color: #e72c70;
+            font-size: 3rem;
+        }
+    }
 
     .steps__step {
         display: flex;
@@ -71,6 +78,9 @@
         margin: 0 auto;
         gap: 15%;
         margin-bottom: 10rem;
+        &:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
 
         .steps__step__text {
             width: 55%;
@@ -89,6 +99,20 @@
             img {
                 width: 100%;
             }
+        }
+        @media screen and (max-width: 580px) {
+            flex-direction: column;
+            gap: 0;
+            width: 90%;
+            &:nth-child(odd) {
+                flex-direction: column;
+            }
+            .steps__step__text {
+                width: 100%;
+            }
+            .steps__step__image {
+                width: 100%;
+            }            
         }
 
     }
