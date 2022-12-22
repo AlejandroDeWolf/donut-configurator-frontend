@@ -57,6 +57,10 @@ body {
     width: 100%;
     height: 24vh;
   }
+  //on hover btn inactive
+  .configurator__btn:hover {
+    background-color: #e72c70;
+  }
 }
 
 .buttons__div {

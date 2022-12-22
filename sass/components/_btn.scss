@@ -37,3 +37,8 @@
   cursor: default;
   float: right;
 }
+
+.configurator__btn--inactive:hover {
+  background-color: global.$color-gray;
+  color: global.$color-white;
+}
