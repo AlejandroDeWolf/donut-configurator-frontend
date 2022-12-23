@@ -209,7 +209,6 @@ function hideToppings() {
     }
 }
 
-
 document.querySelector('.topping__clear').addEventListener('click', () => {
     hideToppings();
     DonutTopping = "none";
